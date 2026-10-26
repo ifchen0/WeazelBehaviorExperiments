@@ -8,11 +8,14 @@ While your colony is neutral with XCC, a trade caravan from a faction hostile to
 [h2]Wasted time[/h2]
 An XCC squad called in with favor that leaves without taking any damage collects compensation on the way out. They feel you wasted their time.
 
+[h2]Ignored ceremony[/h2]
+Letting an XCC bestowing ceremony expire costs goodwill with XCC (15 by default). It never drops goodwill low enough to turn XCC hostile, since a war would break out with their officer still on your map.
+
 [h2]Notes[/h2][list]
 [*]Collecting uses the vanilla raider stealing behaviour: each member grabs one valuable item within a short distance, or leaves empty-handed. A defeated caravan's dropped goods are the usual catch.
 [*]A message in the top-left corner explains each event when it starts (no letters).
 [*]Attacking the team turns XCC hostile, as with any neutral visitor.
-[*]The caravan chance and the wasted-time behaviour can be changed in the mod settings.
+[*]The caravan chance, the wasted-time behaviour and the ceremony goodwill loss can be changed in the mod settings.
 [*]Safe to add to an existing save. Remove it only when no XCC strike team or collecting squad is on the map.
 [/list]
 [hr][/hr]
