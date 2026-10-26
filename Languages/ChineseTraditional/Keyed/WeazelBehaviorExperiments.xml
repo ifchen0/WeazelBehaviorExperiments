@@ -8,6 +8,6 @@
   <WBE_BestowingPenalty_Desc>不論原因為何，XCC都會把授勳儀式失敗算在你頭上。扣減後的好感度不會低到讓XCC轉為敵對。設為0即關閉。</WBE_BestowingPenalty_Desc>
 
   <WBE_CaravanRaidArrived>一支{XCC_name}突擊隊尾隨{CARAVAN_name}的商隊而來，準備襲擊商隊。</WBE_CaravanRaidArrived>
-  <WBE_CaravanRaidPlunder>{FACTION_name}突擊隊離開前，正在你的地盤上收取規費。</WBE_CaravanRaidPlunder>
-  <WBE_AidPlunderMessage>{FACTION_name}支援隊毫髮無傷，認為你在浪費他們的時間，離開前正在收取補償。</WBE_AidPlunderMessage>
+  <WBE_CaravanRaidPlunder>{FACTION_name}突擊隊離開前，正在搜刮物資。</WBE_CaravanRaidPlunder>
+  <WBE_AidPlunderMessage>{FACTION_name}支援隊毫髮無傷，認為你在浪費他們的時間，離開前正在搜刮物資作為補償。</WBE_AidPlunderMessage>
 </LanguageData>
