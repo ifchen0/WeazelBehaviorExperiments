@@ -15,6 +15,8 @@ namespace WeazelBehaviorExperiments
 
         private Faction targetFaction;
         private IntVec3 fallbackLocation;
+        // The caravan's people. Pack animals and other pawns of the same faction do not count.
+        private List<Pawn> caravanMembers = new List<Pawn>();
 
         public Faction TargetFaction => targetFaction;
 
@@ -22,10 +24,11 @@ namespace WeazelBehaviorExperiments
         {
         }
 
-        public LordJob_WeazelCaravanRaid(Faction targetFaction, IntVec3 fallbackLocation)
+        public LordJob_WeazelCaravanRaid(Faction targetFaction, IntVec3 fallbackLocation, IEnumerable<Pawn> caravanMembers)
         {
             this.targetFaction = targetFaction;
             this.fallbackLocation = fallbackLocation;
+            this.caravanMembers = caravanMembers.ToList();
         }
 
         public override bool AddFleeToil => false;
@@ -46,15 +49,22 @@ namespace WeazelBehaviorExperiments
 
         // Plunder is a lord swap, so the map component does it outside the lord tick.
         public bool ShouldPlunder() =>
-            lord.CurLordToil is LordToil_HuntEnemies && (lord.ticksInToil > GiveUpTicks || !TargetPresent(lord.Map, targetFaction));
+            lord.CurLordToil is LordToil_HuntEnemies && (lord.ticksInToil > GiveUpTicks || !CaravanStanding());
 
-        public static bool TargetPresent(Map map, Faction f) =>
-            f != null && map.mapPawns.SpawnedPawnsInFaction(f).Any(p => !p.Downed && !p.Dead);
+        // Downed, dead or gone from the map: the caravan is beaten or has left.
+        private bool CaravanStanding() =>
+            caravanMembers.Any(p => p != null && p.Spawned && p.Map == lord.Map && !p.Downed && !p.Dead);
 
         public override void ExposeData()
         {
             Scribe_References.Look(ref targetFaction, "targetFaction");
             Scribe_Values.Look(ref fallbackLocation, "fallbackLocation");
+            Scribe_Collections.Look(ref caravanMembers, "caravanMembers", LookMode.Reference);
+            if (Scribe.mode == LoadSaveMode.PostLoadInit)
+            {
+                caravanMembers ??= new List<Pawn>();
+                caravanMembers.RemoveAll(p => p == null);
+            }
         }
     }
 
@@ -95,7 +105,7 @@ namespace WeazelBehaviorExperiments
             foreach (Pawn p in team)
                 GenSpawn.Spawn(p, CellFinder.RandomClosewalkCellNear(entry, map, 8), map);
 
-            LordMaker.MakeNewLord(xcc, new LordJob_WeazelCaravanRaid(caravanLord.faction, caravan[0].Position), map, team);
+            LordMaker.MakeNewLord(xcc, new LordJob_WeazelCaravanRaid(caravanLord.faction, caravan[0].Position, caravan.Where(p => p.RaceProps.Humanlike)), map, team);
             Messages.Message("WBE_CaravanRaidArrived".Translate(xcc.Named("XCC"), caravanLord.faction.Named("CARAVAN")),
                 new LookTargets(team), MessageTypeDefOf.ThreatSmall);
             return true;
