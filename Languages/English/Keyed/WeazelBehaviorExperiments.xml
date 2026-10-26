@@ -7,7 +7,7 @@
   <WBE_BestowingPenalty>Goodwill lost when an XCC bestowing ceremony fails: {0}</WBE_BestowingPenalty>
   <WBE_BestowingPenalty_Desc>XCC blames you for any failed bestowing ceremony, whatever went wrong. The loss never takes goodwill low enough to turn XCC hostile. 0 turns it off.</WBE_BestowingPenalty_Desc>
 
-  <WBE_CaravanRaidArrived>An {XCC_name} strike team has followed the {CARAVAN_name} caravan onto your land. XCC treats a neutral colony as its own turf.</WBE_CaravanRaidArrived>
+  <WBE_CaravanRaidArrived>An {XCC_name} strike team has followed the {CARAVAN_name} caravan here and is moving in to attack it.</WBE_CaravanRaidArrived>
   <WBE_CaravanRaidPlunder>The {FACTION_name} strike team is collecting its due from your turf before leaving.</WBE_CaravanRaidPlunder>
   <WBE_AidPlunderMessage>The {FACTION_name} squad left unscratched and feels you wasted its time. It is collecting compensation on the way out.</WBE_AidPlunderMessage>
 </LanguageData>
