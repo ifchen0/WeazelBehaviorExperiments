@@ -2,6 +2,7 @@ using HarmonyLib;
 using RimWorld;
 using System.Linq;
 using Verse;
+using Verse.AI;
 
 namespace WeazelBehaviorExperiments
 {
@@ -43,6 +44,7 @@ namespace WeazelBehaviorExperiments
     public static class WBE_DefOf
     {
         public static HistoryEventDef WBE_BestowingFailed;
+        public static DutyDef WBE_Plunder;
 
         static WBE_DefOf() => DefOfHelper.EnsureInitializedInCtor(typeof(WBE_DefOf));
     }

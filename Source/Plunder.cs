@@ -1,13 +1,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using RimWorld;
+using UnityEngine;
 using Verse;
+using Verse.AI;
 using Verse.AI.Group;
 
 namespace WeazelBehaviorExperiments
 {
-    // Grab valuables nearby, then leave. Uses the vanilla Steal duty: each pawn takes one stack within
-    // 12 cells (worth 320+) and carries it off the map, or simply leaves when nothing is in reach.
+    // Grab valuables, then leave. Each pawn takes the most valuable load it can carry within a wide radius
+    // and walks off the map with it (vanilla Steal job), or simply leaves when nothing is worth taking.
     public class LordJob_WeazelPlunder : LordJob
     {
         public override bool AddFleeToil => false;
@@ -15,7 +17,7 @@ namespace WeazelBehaviorExperiments
         public override StateGraph CreateGraph()
         {
             var graph = new StateGraph();
-            var plunder = new LordToil_StealCover { cover = false, useAvoidGrid = true };
+            var plunder = new LordToil_WeazelPlunder { useAvoidGrid = true };
             graph.AddToil(plunder);
             var assault = new LordToil_AssaultColony();
             graph.AddToil(assault);
@@ -24,6 +26,52 @@ namespace WeazelBehaviorExperiments
             graph.AddTransition(turnHostile);
             return graph;
         }
+    }
+
+    public class LordToil_WeazelPlunder : LordToil
+    {
+        public override bool AllowSatisfyLongNeeds => false;
+
+        public override void UpdateAllDuties()
+        {
+            foreach (Pawn pawn in lord.ownedPawns)
+                pawn.mindState.duty = new PawnDuty(WBE_DefOf.WBE_Plunder);
+        }
+    }
+
+    // Vanilla JobGiver_Steal only looks 12 cells (and 15 regions) around the thief and takes the nearest
+    // good item. This one looks much further and takes whatever is worth the most in one load.
+    public class JobGiver_WeazelSteal : ThinkNode_JobGiver
+    {
+        private const float SearchRadius = 45f;
+        // Same floor as vanilla stealing: smaller loads are not worth the trip.
+        private const float MinLoadValue = 320f;
+
+        protected override Job TryGiveJob(Pawn pawn)
+        {
+            if (!pawn.health.capacities.CapableOf(PawnCapacityDefOf.Manipulation) || GenAI.InDangerousCombat(pawn))
+                return null;
+            if (!RCellFinder.TryFindBestExitSpot(pawn, out IntVec3 exit))
+                return null;
+
+            float capacity = pawn.GetStatValue(StatDefOf.CarryingCapacity);
+            float radiusSquared = SearchRadius * SearchRadius;
+            Thing best = pawn.Map.listerThings.ThingsInGroup(ThingRequestGroup.HaulableEverOrMinifiable)
+                .Where(t => t.def.stealable && !t.IsBurning() && (t.Position - pawn.Position).LengthHorizontalSquared <= radiusSquared
+                    && LoadValue(t, capacity) >= MinLoadValue)
+                .OrderByDescending(t => LoadValue(t, capacity))
+                .FirstOrDefault(t => pawn.CanReserve(t) && pawn.CanReach(t, PathEndMode.ClosestTouch, Danger.Some));
+            if (best == null) return null;
+
+            Job job = JobMaker.MakeJob(JobDefOf.Steal, best, exit);
+            job.count = LoadCount(best, capacity);
+            return job;
+        }
+
+        private static int LoadCount(Thing t, float capacity) =>
+            Mathf.Max(1, Mathf.Min(t.stackCount, (int)(capacity / t.def.VolumePerUnit)));
+
+        private static float LoadValue(Thing t, float capacity) => t.MarketValue * LoadCount(t, capacity);
     }
 
     public static class PlunderUtility
