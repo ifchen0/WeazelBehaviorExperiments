@@ -18,9 +18,13 @@ namespace WeazelBehaviorExperiments
 
         public static void Postfix(Map map, HashSet<Lord> __state)
         {
-            if (__state == null) return;
+            if (__state != null) RegisterNewAidLords(map, __state);
+        }
+
+        public static void RegisterNewAidLords(Map map, HashSet<Lord> before)
+        {
             var comp = MapComponent_WeazelExperiments.For(map);
-            foreach (Lord lord in map.lordManager.lords.Where(l => !__state.Contains(l) && l.LordJob is LordJob_AssistColony))
+            foreach (Lord lord in map.lordManager.lords.Where(l => !before.Contains(l) && l.LordJob is LordJob_AssistColony))
                 comp?.RegisterAidLord(lord);
         }
     }
