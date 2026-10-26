@@ -8,6 +8,8 @@
 
 Small experimental behaviours for the XCC faction of Weazel Mode.
 
+These scenarios are my own take on how the Weazels would act, based on my impression of the faction. They are not part of the original mod's lore and are not endorsed by its author.
+
 Protection racket
 While your colony is neutral with XCC, a trade caravan from a faction hostile to XCC may draw an XCC strike team onto your map. The team hunts the caravan, and once the caravan is gone (defeated or left) it grabs valuables lying nearby before leaving. XCC treats a neutral colony as its own turf.
 
@@ -16,7 +18,9 @@ An XCC squad called in with favor that leaves without taking any damage grabs va
 
 Notes
 - Plundering uses the vanilla raider stealing behaviour: each member takes one valuable stack within a short distance, or leaves empty-handed.
-- Attacking the team turns XCC hostile, as with any neutral visitor.</description>
+- A message in the top-left corner explains each event when it starts (no letters).
+- Attacking the team turns XCC hostile, as with any neutral visitor.
+- Safe to add to an existing save. Remove it only when no XCC strike team or collecting squad is on the map.</description>
   <modDependencies>
     <li><packageId>brrainz.harmony</packageId><displayName>Harmony</displayName><steamWorkshopUrl>steam://url/CommunityFilePage/2009463077</steamWorkshopUrl></li>
     <li><packageId>Wherewolf.WeazelRaceMod</packageId><displayName>Weazel Mode</displayName><steamWorkshopUrl>steam://url/CommunityFilePage/3820790624</steamWorkshopUrl></li>

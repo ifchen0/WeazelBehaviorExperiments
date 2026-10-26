@@ -5,8 +5,7 @@
   <WBE_AidPlunder>毫髮無傷的XCC支援隊離開時會搜刮</WBE_AidPlunder>
   <WBE_AidPlunder_Desc>用功績召來的XCC支援隊，若離開時沒有受到任何傷害，會順手拿走附近的值錢物品。</WBE_AidPlunder_Desc>
 
-  <WBE_CaravanRaidLetterLabel>XCC突擊隊</WBE_CaravanRaidLetterLabel>
-  <WBE_CaravanRaidLetterText>一支{XCC_name}突擊隊尾隨{CARAVAN_name}的商隊進入了你的土地。\n\nXCC把中立的殖民地視為自己的地盤。他們不是衝著你來的，但離開前會順手拿點好處。</WBE_CaravanRaidLetterText>
-  <WBE_CaravanRaidPlunder>{FACTION_name}突擊隊離開前正在搜刮值錢的物品。</WBE_CaravanRaidPlunder>
-  <WBE_AidPlunderMessage>{FACTION_name}支援隊認為你在浪費他們的時間，離開前正在搜刮值錢的物品。</WBE_AidPlunderMessage>
+  <WBE_CaravanRaidArrived>一支{XCC_name}突擊隊尾隨{CARAVAN_name}的商隊進入了你的土地。XCC把中立的殖民地視為自己的地盤。</WBE_CaravanRaidArrived>
+  <WBE_CaravanRaidPlunder>{FACTION_name}突擊隊離開前，正在你的地盤上收取規費。</WBE_CaravanRaidPlunder>
+  <WBE_AidPlunderMessage>{FACTION_name}支援隊毫髮無傷，認為你在浪費他們的時間，離開前正在收取補償。</WBE_AidPlunderMessage>
 </LanguageData>

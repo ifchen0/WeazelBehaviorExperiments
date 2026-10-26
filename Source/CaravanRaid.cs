@@ -96,10 +96,8 @@ namespace WeazelBehaviorExperiments
                 GenSpawn.Spawn(p, CellFinder.RandomClosewalkCellNear(entry, map, 8), map);
 
             LordMaker.MakeNewLord(xcc, new LordJob_WeazelCaravanRaid(caravanLord.faction, caravan[0].Position), map, team);
-            Find.LetterStack.ReceiveLetter(
-                "WBE_CaravanRaidLetterLabel".Translate(),
-                "WBE_CaravanRaidLetterText".Translate(xcc.Named("XCC"), caravanLord.faction.Named("CARAVAN")),
-                LetterDefOf.ThreatSmall, new LookTargets(team));
+            Messages.Message("WBE_CaravanRaidArrived".Translate(xcc.Named("XCC"), caravanLord.faction.Named("CARAVAN")),
+                new LookTargets(team), MessageTypeDefOf.ThreatSmall);
             return true;
         }
     }

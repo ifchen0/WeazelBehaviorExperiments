@@ -5,8 +5,7 @@
   <WBE_AidPlunder>Unharmed XCC squads plunder when leaving</WBE_AidPlunder>
   <WBE_AidPlunder_Desc>An XCC squad called in with favor that leaves without taking any damage grabs valuables near it on the way out.</WBE_AidPlunder_Desc>
 
-  <WBE_CaravanRaidLetterLabel>XCC strike team</WBE_CaravanRaidLetterLabel>
-  <WBE_CaravanRaidLetterText>An {XCC_name} strike team has followed the {CARAVAN_name} caravan onto your land.\n\nXCC treats a neutral colony as its own turf. They are not here for you, but they will help themselves before they leave.</WBE_CaravanRaidLetterText>
-  <WBE_CaravanRaidPlunder>The {FACTION_name} strike team is helping itself to valuables before leaving.</WBE_CaravanRaidPlunder>
-  <WBE_AidPlunderMessage>The {FACTION_name} squad feels you wasted its time and is helping itself to valuables before leaving.</WBE_AidPlunderMessage>
+  <WBE_CaravanRaidArrived>An {XCC_name} strike team has followed the {CARAVAN_name} caravan onto your land. XCC treats a neutral colony as its own turf.</WBE_CaravanRaidArrived>
+  <WBE_CaravanRaidPlunder>The {FACTION_name} strike team is collecting its due from your turf before leaving.</WBE_CaravanRaidPlunder>
+  <WBE_AidPlunderMessage>The {FACTION_name} squad left unscratched and feels you wasted its time. It is collecting compensation on the way out.</WBE_AidPlunderMessage>
 </LanguageData>
