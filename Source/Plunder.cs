@@ -12,7 +12,24 @@ namespace WeazelBehaviorExperiments
     // and walks off the map with it (vanilla Steal job), or simply leaves when nothing is worth taking.
     public class LordJob_WeazelPlunder : LordJob
     {
+        // Invited squads know their way around the colony and open its doors; strike teams leave closed rooms alone.
+        public bool throughDoors;
+
+        public LordJob_WeazelPlunder()
+        {
+        }
+
+        public LordJob_WeazelPlunder(bool throughDoors)
+        {
+            this.throughDoors = throughDoors;
+        }
+
         public override bool AddFleeToil => false;
+
+        public override void ExposeData()
+        {
+            Scribe_Values.Look(ref throughDoors, "throughDoors");
+        }
 
         public override StateGraph CreateGraph()
         {
@@ -59,8 +76,12 @@ namespace WeazelBehaviorExperiments
 
             float capacity = pawn.GetStatValue(StatDefOf.CarryingCapacity);
             float radiusSquared = SearchRadius * SearchRadius;
-            // As in vanilla stealing, items behind closed doors are off limits, so a closed storeroom protects its contents.
-            TraverseParms traverse = TraverseParms.For(TraverseMode.NoPassClosedDoors, Danger.Some);
+            // As in vanilla stealing, items behind closed doors are off limits unless the lord allows doors,
+            // so a closed storeroom protects its contents from strike teams.
+            bool throughDoors = (pawn.GetLord()?.LordJob as LordJob_WeazelPlunder)?.throughDoors ?? false;
+            TraverseParms traverse = throughDoors
+                ? TraverseParms.For(pawn, Danger.Some)
+                : TraverseParms.For(TraverseMode.NoPassClosedDoors, Danger.Some);
             Thing best = pawn.Map.listerThings.ThingsInGroup(ThingRequestGroup.HaulableEverOrMinifiable)
                 .Where(t => t.def.stealable && !t.IsBurning() && (t.Position - pawn.Position).LengthHorizontalSquared <= radiusSquared
                     && LoadValue(t, capacity) >= MinLoadValue)
@@ -82,7 +103,7 @@ namespace WeazelBehaviorExperiments
     public static class PlunderUtility
     {
         // Moves the lord's pawns into a plunder lord. The old lord is removed once empty.
-        public static void StartPlunder(Lord oldLord, string messageKey)
+        public static void StartPlunder(Lord oldLord, string messageKey, bool throughDoors)
         {
             Map map = oldLord.Map;
             Faction faction = oldLord.faction;
@@ -94,7 +115,7 @@ namespace WeazelBehaviorExperiments
             if (oldLord.ownedPawns.Count == 0)
                 map.lordManager.RemoveLord(oldLord);
 
-            LordMaker.MakeNewLord(faction, new LordJob_WeazelPlunder(), map, pawns);
+            LordMaker.MakeNewLord(faction, new LordJob_WeazelPlunder(throughDoors), map, pawns);
             Messages.Message(messageKey.Translate(faction.Named("FACTION")), new LookTargets(pawns), MessageTypeDefOf.NegativeEvent);
         }
     }

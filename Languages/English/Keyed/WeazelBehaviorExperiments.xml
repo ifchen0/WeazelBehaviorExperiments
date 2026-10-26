@@ -3,7 +3,7 @@
   <WBE_CaravanRaidChance>Strike team chance per enemy caravan: {0}</WBE_CaravanRaidChance>
   <WBE_CaravanRaidChance_Desc>While your colony is neutral with XCC, each trade caravan from a faction hostile to XCC has this chance of drawing an XCC strike team. 0% turns it off.</WBE_CaravanRaidChance_Desc>
   <WBE_AidPlunder>Unharmed XCC squads plunder when leaving</WBE_AidPlunder>
-  <WBE_AidPlunder_Desc>An XCC squad called in with favor that leaves without taking any damage carries off the most valuable loads within a wide radius, stockpiles included, on the way out. Items behind closed doors are safe.</WBE_AidPlunder_Desc>
+  <WBE_AidPlunder_Desc>An XCC squad called in with favor that leaves without taking any damage carries off the most valuable loads within a wide radius, stockpiles included, on the way out. They know their way around and open your doors.</WBE_AidPlunder_Desc>
   <WBE_BestowingPenalty>Goodwill lost when an XCC bestowing ceremony fails: {0}</WBE_BestowingPenalty>
   <WBE_BestowingPenalty_Desc>XCC blames you for any failed bestowing ceremony, whatever went wrong. The loss never takes goodwill low enough to turn XCC hostile. 0 turns it off.</WBE_BestowingPenalty_Desc>
 

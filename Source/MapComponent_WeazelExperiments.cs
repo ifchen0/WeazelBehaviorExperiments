@@ -44,7 +44,7 @@ namespace WeazelBehaviorExperiments
             foreach (Lord lord in lords)
             {
                 if (lord.LordJob is LordJob_WeazelCaravanRaid raid && raid.ShouldPlunder())
-                    PlunderUtility.StartPlunder(lord, "WBE_CaravanRaidPlunder");
+                    PlunderUtility.StartPlunder(lord, "WBE_CaravanRaidPlunder", throughDoors: false);
             }
             CheckAidLords(lords);
         }
@@ -85,7 +85,7 @@ namespace WeazelBehaviorExperiments
                 Forget(id);
                 if (undamaged && WeazelBehaviorExperimentsMod.Settings.aidPlunder && XccUtility.IsXcc(lord.faction)
                     && !lord.faction.HostileTo(Faction.OfPlayer))
-                    PlunderUtility.StartPlunder(lord, "WBE_AidPlunderMessage");
+                    PlunderUtility.StartPlunder(lord, "WBE_AidPlunderMessage", throughDoors: true);
             }
         }
 

@@ -21,7 +21,7 @@ Failed ceremony
 XCC blames you for any failed bestowing ceremony, whether you let it expire, a raid broke it up or someone died, and takes goodwill for it (15 by default). It never drops goodwill low enough to turn XCC hostile, since a war would break out with their officer still on your map.
 
 Notes
-- Each member carries off the most valuable load within a wide radius, your stockpiles included, or leaves empty-handed. Items behind closed doors are safe.
+- Each member carries off the most valuable load within a wide radius, your stockpiles included, or leaves empty-handed. Strike teams leave closed rooms alone; a squad you called in knows its way around and opens your doors.
 - A message in the top-left corner explains each event when it starts (no letters).
 - Attacking the team turns XCC hostile, as with any neutral visitor.
 - Safe to add to an existing save. Remove it only when no XCC strike team or collecting squad is on the map.</description>

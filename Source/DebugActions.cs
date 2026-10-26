@@ -24,7 +24,7 @@ namespace WeazelBehaviorExperiments
         private static void PlunderNow()
         {
             foreach (Lord lord in Find.CurrentMap.lordManager.lords.Where(l => XccUtility.IsXcc(l.faction) && !(l.LordJob is LordJob_WeazelPlunder)).ToList())
-                PlunderUtility.StartPlunder(lord, "WBE_AidPlunderMessage");
+                PlunderUtility.StartPlunder(lord, "WBE_AidPlunderMessage", throughDoors: true);
         }
     }
 }
