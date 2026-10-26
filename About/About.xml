@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+  <name>Weazel Behavior Experiments</name>
+  <author>ifchen0</author>
+  <packageId>ifchen0.weazelbehaviorexperiments</packageId>
+  <supportedVersions><li>1.6</li><li>1.7</li></supportedVersions>
+  <description>Warning: this mod was written with AI coding tools (Claude Code).
+
+Small experimental behaviours for the XCC faction of Weazel Mode.
+
+Protection racket
+While your colony is neutral with XCC, a trade caravan from a faction hostile to XCC may draw an XCC strike team onto your map. The team hunts the caravan, and once the caravan is gone (defeated or left) it grabs valuables lying nearby before leaving. XCC treats a neutral colony as its own turf.
+
+Wasted time
+An XCC squad called in with favor that leaves without taking any damage grabs valuables near it before leaving. They feel you wasted their time.
+
+Notes
+- Plundering uses the vanilla raider stealing behaviour: each member takes one valuable stack within a short distance, or leaves empty-handed.
+- Attacking the team turns XCC hostile, as with any neutral visitor.</description>
+  <modDependencies>
+    <li><packageId>brrainz.harmony</packageId><displayName>Harmony</displayName><steamWorkshopUrl>steam://url/CommunityFilePage/2009463077</steamWorkshopUrl></li>
+    <li><packageId>Wherewolf.WeazelRaceMod</packageId><displayName>Weazel Mode</displayName><steamWorkshopUrl>steam://url/CommunityFilePage/3820790624</steamWorkshopUrl></li>
+  </modDependencies>
+  <loadAfter><li>brrainz.harmony</li><li>Wherewolf.WeazelRaceMod</li></loadAfter>
+</ModMetaData>
