@@ -56,11 +56,13 @@ namespace WeazelBehaviorExperiments
 
             float capacity = pawn.GetStatValue(StatDefOf.CarryingCapacity);
             float radiusSquared = SearchRadius * SearchRadius;
+            // As in vanilla stealing, items behind closed doors are off limits, so a closed storeroom protects its contents.
+            TraverseParms traverse = TraverseParms.For(TraverseMode.NoPassClosedDoors, Danger.Some);
             Thing best = pawn.Map.listerThings.ThingsInGroup(ThingRequestGroup.HaulableEverOrMinifiable)
                 .Where(t => t.def.stealable && !t.IsBurning() && (t.Position - pawn.Position).LengthHorizontalSquared <= radiusSquared
                     && LoadValue(t, capacity) >= MinLoadValue)
                 .OrderByDescending(t => LoadValue(t, capacity))
-                .FirstOrDefault(t => pawn.CanReserve(t) && pawn.CanReach(t, PathEndMode.ClosestTouch, Danger.Some));
+                .FirstOrDefault(t => pawn.CanReserve(t) && pawn.Map.reachability.CanReach(pawn.Position, t, PathEndMode.ClosestTouch, traverse));
             if (best == null) return null;
 
             Job job = JobMaker.MakeJob(JobDefOf.Steal, best, exit);
