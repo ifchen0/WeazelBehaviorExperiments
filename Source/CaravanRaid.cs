@@ -51,9 +51,20 @@ namespace WeazelBehaviorExperiments
         public bool ShouldPlunder() =>
             lord.CurLordToil is LordToil_HuntEnemies && (lord.ticksInToil > GiveUpTicks || !CaravanStanding());
 
-        // Downed, dead or gone from the map: the caravan is beaten or has left.
-        private bool CaravanStanding() =>
-            caravanMembers.Any(p => p != null && p.Spawned && p.Map == lord.Map && !p.Downed && !p.Dead);
+        // A caravan is done once none of its people is still holding its ground: downed, dead, gone,
+        // fleeing in panic, cut off from the caravan, or leaving with it (any vanilla exit toil, including
+        // LordToil_ExitMapTraderFighting, which shoots back on the way out).
+        private bool CaravanStanding() => caravanMembers.Any(HoldingGround);
+
+        private bool HoldingGround(Pawn p)
+        {
+            if (p == null || !p.Spawned || p.Map != lord.Map || p.Downed || p.Dead) return false;
+            if (p.InMentalState && p.MentalStateDef == MentalStateDefOf.PanicFlee) return false;
+            Lord caravanLord = p.GetLord();
+            if (!(caravanLord?.LordJob is LordJob_TradeWithColony)) return false;
+            LordToil toil = caravanLord.CurLordToil;
+            return !(toil is LordToil_ExitMap || toil is LordToil_ExitMapAndEscortCarriers || toil is LordToil_ExitMapTraderFighting);
+        }
 
         public override void ExposeData()
         {
