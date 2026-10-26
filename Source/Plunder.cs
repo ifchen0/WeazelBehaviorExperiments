@@ -32,6 +32,9 @@ namespace WeazelBehaviorExperiments
     {
         public override bool AllowSatisfyLongNeeds => false;
 
+        // As in vanilla stealing: grab and go instead of stopping to bandage first.
+        public override bool AllowSelfTend => false;
+
         public override void UpdateAllDuties()
         {
             foreach (Pawn pawn in lord.ownedPawns)
