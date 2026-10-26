@@ -16,4 +16,4 @@ An XCC squad called in with favor that leaves without taking any damage collects
 [*]Safe to add to an existing save. Remove it only when no XCC strike team or collecting squad is on the map.
 [/list]
 [hr][/hr]
-This mod was developed with the help of AI coding tools (Claude Code). Full source code is included in the Source folder for review.
+This mod was developed with the help of AI coding tools (Claude Code). Full source code is included in the Source folder and on [url=https://github.com/ifchen0/WeazelBehaviorExperiments]GitHub[/url] for review.
