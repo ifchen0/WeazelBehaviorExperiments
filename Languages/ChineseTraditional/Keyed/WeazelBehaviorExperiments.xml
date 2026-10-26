@@ -3,7 +3,7 @@
   <WBE_CaravanRaidChance>敵對商隊引來突擊隊的機率：{0}</WBE_CaravanRaidChance>
   <WBE_CaravanRaidChance_Desc>殖民地與XCC保持中立時，每支與XCC敵對陣營的商隊，都有這個機率引來XCC突擊隊。設為0%即關閉。</WBE_CaravanRaidChance_Desc>
   <WBE_AidPlunder>毫髮無傷的XCC支援隊離開時會搜刮</WBE_AidPlunder>
-  <WBE_AidPlunder_Desc>用功績召來的XCC支援隊，若離開時沒有受到任何傷害，會拿走一定範圍內最值錢的物品（包括你倉庫裡的）。他們熟悉你的基地，會自己開門進去拿。</WBE_AidPlunder_Desc>
+  <WBE_AidPlunder_Desc>用功績或通訊台召來的XCC支援隊，若離開時沒有受到任何傷害，會拿走一定範圍內最值錢的物品（包括你倉庫裡的）。他們熟悉你的基地，會自己開門進去拿。</WBE_AidPlunder_Desc>
   <WBE_BestowingPenalty>XCC授勳儀式失敗時減少的好感度：{0}</WBE_BestowingPenalty>
   <WBE_BestowingPenalty_Desc>不論原因為何，XCC都會把授勳儀式失敗算在你頭上。扣減後的好感度不會低到讓XCC轉為敵對。設為0即關閉。</WBE_BestowingPenalty_Desc>
 

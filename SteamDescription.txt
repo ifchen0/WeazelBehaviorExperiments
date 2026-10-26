@@ -6,7 +6,7 @@ These scenarios are my own take on how the Weazels would act, based on my impres
 While your colony is neutral with XCC, a trade caravan from a faction hostile to XCC may draw an XCC strike team onto your map (30% per caravan by default). The team hunts the caravan, and once the caravan is gone, defeated or left, it collects its due before leaving. XCC treats a neutral colony as its own turf.
 
 [h2]Wasted time[/h2]
-An XCC squad called in with favor that leaves without taking any damage collects compensation on the way out. They feel you wasted their time.
+An XCC squad called in with favor, or requested from an allied XCC on the comms console, that leaves without taking any damage collects compensation on the way out. They feel you wasted their time.
 
 [h2]Failed ceremony[/h2]
 XCC blames you for any failed bestowing ceremony, whether you let it expire, a raid broke it up or someone died, and takes goodwill for it (15 by default). It never drops goodwill low enough to turn XCC hostile, since a war would break out with their officer still on your map.

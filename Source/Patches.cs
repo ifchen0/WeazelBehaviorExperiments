@@ -7,7 +7,7 @@ using Verse.AI.Group;
 
 namespace WeazelBehaviorExperiments
 {
-    // Tag the lord a military aid permit creates for XCC, so the map component can watch it leave.
+    // Tag the lord a military aid permit (squad or heavy team) creates for XCC, so the map component can watch it leave.
     [HarmonyPatch(typeof(RoyalTitlePermitWorker_CallAid), "CallAid")]
     public static class Patch_CallAid
     {
@@ -27,6 +27,16 @@ namespace WeazelBehaviorExperiments
             foreach (Lord lord in map.lordManager.lords.Where(l => !before.Contains(l) && l.LordJob is LordJob_AssistColony))
                 comp?.RegisterAidLord(lord);
         }
+    }
+
+    // Military aid requested from an allied XCC through the comms console: same incident, same tracking.
+    [HarmonyPatch(typeof(FactionDialogMaker), "CallForAid")]
+    public static class Patch_CommsCallForAid
+    {
+        public static void Prefix(Map map, Faction faction, out HashSet<Lord> __state) =>
+            Patch_CallAid.Prefix(map, faction, out __state);
+
+        public static void Postfix(Map map, HashSet<Lord> __state) => Patch_CallAid.Postfix(map, __state);
     }
 
     [HarmonyPatch(typeof(Pawn), nameof(Pawn.PostApplyDamage))]
