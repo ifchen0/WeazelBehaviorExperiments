@@ -51,10 +51,8 @@ namespace WeazelBehaviorExperiments
             else
                 parms.points = permit.royalAid.points;
 
-            var before = new HashSet<Lord>(map.lordManager.lords);
-            if (IncidentDefOf.RaidFriendly.Worker.TryExecute(parms))
-                Patch_CallAid.RegisterNewAidLords(map, before);
-            else
+            // Registered by Patch_MilitaryAid, the same path a real permit or comms request takes.
+            if (!IncidentDefOf.RaidFriendly.Worker.TryExecute(parms))
                 Messages.Message("Could not send the aid squad.", MessageTypeDefOf.RejectInput, false);
         }
 

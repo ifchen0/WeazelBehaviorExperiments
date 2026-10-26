@@ -7,36 +7,27 @@ using Verse.AI.Group;
 
 namespace WeazelBehaviorExperiments
 {
-    // Tag the lord a military aid permit (squad or heavy team) creates for XCC, so the map component can watch it leave.
-    [HarmonyPatch(typeof(RoyalTitlePermitWorker_CallAid), "CallAid")]
-    public static class Patch_CallAid
+    // Tag the lord of military aid XCC sends on request, so the map component can watch it leave.
+    // Permits (RoyalTitlePermitWorker_CallAid.CallAid) and the comms console (FactionDialogMaker.CallForAid)
+    // both end in RaidFriendly.Worker.TryExecute with raidArrivalModeForQuickMilitaryAid set. Hooking that
+    // shared entry instead of the two small callers, which the 1.7 runtime may inline past a patch.
+    [HarmonyPatch(typeof(IncidentWorker), nameof(IncidentWorker.TryExecute))]
+    public static class Patch_MilitaryAid
     {
-        public static void Prefix(Map map, Faction faction, out HashSet<Lord> __state)
+        public static void Prefix(IncidentParms parms, out HashSet<Lord> __state)
         {
-            __state = XccUtility.IsXcc(faction) ? new HashSet<Lord>(map.lordManager.lords) : null;
+            __state = parms.raidArrivalModeForQuickMilitaryAid && XccUtility.IsXcc(parms.faction) && parms.target is Map map
+                ? new HashSet<Lord>(map.lordManager.lords)
+                : null;
         }
 
-        public static void Postfix(Map map, HashSet<Lord> __state)
+        public static void Postfix(IncidentParms parms, bool __result, HashSet<Lord> __state)
         {
-            if (__state != null) RegisterNewAidLords(map, __state);
-        }
-
-        public static void RegisterNewAidLords(Map map, HashSet<Lord> before)
-        {
+            if (!__result || __state == null || !(parms.target is Map map)) return;
             var comp = MapComponent_WeazelExperiments.For(map);
-            foreach (Lord lord in map.lordManager.lords.Where(l => !before.Contains(l) && l.LordJob is LordJob_AssistColony))
+            foreach (Lord lord in map.lordManager.lords.Where(l => !__state.Contains(l) && l.LordJob is LordJob_AssistColony))
                 comp?.RegisterAidLord(lord);
         }
-    }
-
-    // Military aid requested from an allied XCC through the comms console: same incident, same tracking.
-    [HarmonyPatch(typeof(FactionDialogMaker), "CallForAid")]
-    public static class Patch_CommsCallForAid
-    {
-        public static void Prefix(Map map, Faction faction, out HashSet<Lord> __state) =>
-            Patch_CallAid.Prefix(map, faction, out __state);
-
-        public static void Postfix(Map map, HashSet<Lord> __state) => Patch_CallAid.Postfix(map, __state);
     }
 
     [HarmonyPatch(typeof(Pawn), nameof(Pawn.PostApplyDamage))]
