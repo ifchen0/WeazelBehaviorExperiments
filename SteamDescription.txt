@@ -8,8 +8,8 @@ While your colony is neutral with XCC, a trade caravan from a faction hostile to
 [h2]Wasted time[/h2]
 An XCC squad called in with favor that leaves without taking any damage collects compensation on the way out. They feel you wasted their time.
 
-[h2]Ignored ceremony[/h2]
-Letting an XCC bestowing ceremony expire costs goodwill with XCC (15 by default). It never drops goodwill low enough to turn XCC hostile, since a war would break out with their officer still on your map.
+[h2]Failed ceremony[/h2]
+XCC blames you for any failed bestowing ceremony, whether you let it expire, a raid broke it up or someone died, and takes goodwill for it (15 by default). It never drops goodwill low enough to turn XCC hostile, since a war would break out with their officer still on your map.
 
 [h2]Notes[/h2][list]
 [*]Collecting uses the vanilla raider stealing behaviour: each member grabs one valuable item within a short distance, or leaves empty-handed. A defeated caravan's dropped goods are the usual catch.

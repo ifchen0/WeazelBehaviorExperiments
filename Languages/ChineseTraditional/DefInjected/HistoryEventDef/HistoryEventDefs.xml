@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-  <WBE_BestowingExpired.label>無視授勳儀式</WBE_BestowingExpired.label>
+  <WBE_BestowingFailed.label>授勳儀式失敗</WBE_BestowingFailed.label>
 </LanguageData>

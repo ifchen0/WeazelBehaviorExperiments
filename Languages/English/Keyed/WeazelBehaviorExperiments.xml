@@ -4,8 +4,8 @@
   <WBE_CaravanRaidChance_Desc>While your colony is neutral with XCC, each trade caravan from a faction hostile to XCC has this chance of drawing an XCC strike team. 0% turns it off.</WBE_CaravanRaidChance_Desc>
   <WBE_AidPlunder>Unharmed XCC squads plunder when leaving</WBE_AidPlunder>
   <WBE_AidPlunder_Desc>An XCC squad called in with favor that leaves without taking any damage grabs valuables near it on the way out.</WBE_AidPlunder_Desc>
-  <WBE_BestowingPenalty>Goodwill lost when an XCC bestowing ceremony expires: {0}</WBE_BestowingPenalty>
-  <WBE_BestowingPenalty_Desc>XCC takes an ignored bestowing ceremony as a snub. The loss never takes goodwill low enough to turn XCC hostile. 0 turns it off.</WBE_BestowingPenalty_Desc>
+  <WBE_BestowingPenalty>Goodwill lost when an XCC bestowing ceremony fails: {0}</WBE_BestowingPenalty>
+  <WBE_BestowingPenalty_Desc>XCC blames you for any failed bestowing ceremony, whatever went wrong. The loss never takes goodwill low enough to turn XCC hostile. 0 turns it off.</WBE_BestowingPenalty_Desc>
 
   <WBE_CaravanRaidArrived>An {XCC_name} strike team has followed the {CARAVAN_name} caravan onto your land. XCC treats a neutral colony as its own turf.</WBE_CaravanRaidArrived>
   <WBE_CaravanRaidPlunder>The {FACTION_name} strike team is collecting its due from your turf before leaving.</WBE_CaravanRaidPlunder>

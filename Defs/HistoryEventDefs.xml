@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
   <HistoryEventDef>
-    <defName>WBE_BestowingExpired</defName>
-    <label>bestowing ceremony ignored</label>
+    <defName>WBE_BestowingFailed</defName>
+    <label>bestowing ceremony failed</label>
   </HistoryEventDef>
 </Defs>
