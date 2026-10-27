@@ -4,4 +4,8 @@
     <defName>WBE_BestowingFailed</defName>
     <label>bestowing ceremony failed</label>
   </HistoryEventDef>
+  <HistoryEventDef>
+    <defName>WBE_DriftPlunder</defName>
+    <label>looted the colony</label>
+  </HistoryEventDef>
 </Defs>

@@ -6,8 +6,13 @@
   <WBE_AidPlunder_Desc>用功績或通訊台召來的XCC支援隊，若離開時沒有受到任何傷害，會拿走一定範圍內最值錢的物品（包括你倉庫裡的）。他們熟悉你的基地，會自己開門進去拿。</WBE_AidPlunder_Desc>
   <WBE_BestowingPenalty>XCC授勳儀式失敗時減少的好感度：{0}</WBE_BestowingPenalty>
   <WBE_BestowingPenalty_Desc>不論原因為何，XCC都會把授勳儀式失敗算在你頭上。扣減後的好感度不會低到讓XCC轉為敵對。設為0即關閉。</WBE_BestowingPenalty_Desc>
+  <WBE_DriftPlunder>XCC以搜刮代替好感度自然下滑</WBE_DriftPlunder>
+  <WBE_DriftPlunder_Desc>原版每50天會讓XCC的好感度往長期好感度下滑10點。若XCC與你中立、好感度低於0，且你的殖民地夠富裕，XCC會改派一支小隊來搜刮（會自己開門）。帶走的物資照原版送禮比例（40銀=1點）換回好感度，最多回到0；什麼都沒拿到就照原版下滑。</WBE_DriftPlunder_Desc>
+  <WBE_DriftPlunderMinWealth>XCC來搜刮的最低殖民地財富：{0}</WBE_DriftPlunderMinWealth>
+  <WBE_DriftPlunderMinWealth_Desc>以財富最高的玩家基地計算，低於這個值時照原版好感度下滑。預設14000是原版財富開始增加襲擊點數的門檻。</WBE_DriftPlunderMinWealth_Desc>
 
   <WBE_CaravanRaidArrived>一支{XCC_name}突擊隊尾隨{CARAVAN_name}的商隊而來，準備襲擊商隊。</WBE_CaravanRaidArrived>
   <WBE_CaravanRaidPlunder>{FACTION_name}突擊隊離開前，正在搜刮物資。</WBE_CaravanRaidPlunder>
+  <WBE_DriftPlunderArrived>{FACTION_name}派了一支小隊來「維持良好關係」，正要搜刮你的物資。</WBE_DriftPlunderArrived>
   <WBE_AidPlunderMessage>{FACTION_name}支援隊毫髮無傷，認為你在浪費他們的時間，離開前正在搜刮物資作為補償。</WBE_AidPlunderMessage>
 </LanguageData>

@@ -70,6 +70,14 @@ namespace WeazelBehaviorExperiments
             }
         }
 
+        // Sends the looters that replace the 50-day goodwill drift, under the same conditions.
+        [DebugAction(Category, "XCC drift looters now", allowedGameStates = AllowedGameStates.PlayingOnMap)]
+        private static void DriftLootersNow()
+        {
+            if (!DriftPlunderUtility.TrySendLooters(XccUtility.Xcc, out string failReason))
+                Messages.Message("Not sent: " + failReason + ".", MessageTypeDefOf.RejectInput, false);
+        }
+
         [DebugAction(Category, "XCC lords plunder now", allowedGameStates = AllowedGameStates.PlayingOnMap)]
         private static void PlunderNow()
         {

@@ -14,21 +14,40 @@ namespace WeazelBehaviorExperiments
     {
         // Invited squads know their way around the colony and open its doors; strike teams leave closed rooms alone.
         public bool throughDoors;
+        // Drift looters: what they carry off settles goodwill once the last of them is gone.
+        public bool settlesGoodwill;
+        private float haul;
 
         public LordJob_WeazelPlunder()
         {
         }
 
-        public LordJob_WeazelPlunder(bool throughDoors)
+        public LordJob_WeazelPlunder(bool throughDoors, bool settlesGoodwill = false)
         {
             this.throughDoors = throughDoors;
+            this.settlesGoodwill = settlesGoodwill;
         }
 
         public override bool AddFleeToil => false;
 
+        // Called before ExitMap destroys the carried load.
+        public override void Notify_PawnLost(Pawn p, PawnLostCondition condition)
+        {
+            Thing load = p.carryTracker?.CarriedThing;
+            if (settlesGoodwill && condition == PawnLostCondition.ExitedMap && load != null && !(load is Pawn))
+                haul += load.MarketValue * load.stackCount;
+        }
+
+        public override void Cleanup()
+        {
+            if (settlesGoodwill) DriftPlunderUtility.Settle(lord.faction, haul);
+        }
+
         public override void ExposeData()
         {
             Scribe_Values.Look(ref throughDoors, "throughDoors");
+            Scribe_Values.Look(ref settlesGoodwill, "settlesGoodwill");
+            Scribe_Values.Look(ref haul, "haul");
         }
 
         public override StateGraph CreateGraph()

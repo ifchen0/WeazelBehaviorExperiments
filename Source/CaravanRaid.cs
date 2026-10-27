@@ -98,23 +98,7 @@ namespace WeazelBehaviorExperiments
 
             // Match the caravan's fighters, so the outcome is not decided before the shooting starts.
             float points = caravan.Where(p => p.RaceProps.Humanlike).Sum(p => p.kindDef.combatPower) * 1.2f;
-            points = Mathf.Max(points, xcc.def.MinPointsToGeneratePawnGroup(PawnGroupKindDefOf.Combat));
-            var parms = new PawnGroupMakerParms
-            {
-                groupKind = PawnGroupKindDefOf.Combat,
-                tile = map.Tile,
-                faction = xcc,
-                points = points,
-            };
-            List<Pawn> team = PawnGroupMakerUtility.GeneratePawns(parms).ToList();
-            if (team.Count == 0) return false;
-            if (!RCellFinder.TryFindRandomPawnEntryCell(out IntVec3 entry, map, CellFinder.EdgeRoadChance_Hostile))
-            {
-                foreach (Pawn p in team) Find.WorldPawns.PassToWorld(p, PawnDiscardDecideMode.Discard);
-                return false;
-            }
-            foreach (Pawn p in team)
-                GenSpawn.Spawn(p, CellFinder.RandomClosewalkCellNear(entry, map, 8), map);
+            if (!XccUtility.TrySpawnGroup(map, xcc, points, out List<Pawn> team)) return false;
 
             LordMaker.MakeNewLord(xcc, new LordJob_WeazelCaravanRaid(caravanLord.faction, caravan[0].Position, caravan.Where(p => p.RaceProps.Humanlike)), map, team);
             Messages.Message("WBE_CaravanRaidArrived".Translate(xcc.Named("XCC"), caravanLord.faction.Named("CARAVAN")),

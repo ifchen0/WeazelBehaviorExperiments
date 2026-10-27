@@ -1,5 +1,8 @@
+using System.Collections.Generic;
+using System.Linq;
 using HarmonyLib;
 using RimWorld;
+using RimWorld.Planet;
 using UnityEngine;
 using Verse;
 
@@ -12,12 +15,17 @@ namespace WeazelBehaviorExperiments
         public bool aidPlunder = true;
         // Goodwill lost when an XCC bestowing ceremony expires. 0 turns it off.
         public int bestowingPenalty = 15;
+        public bool driftPlunder = true;
+        // Colony wealth below this is not worth a visit. Default: vanilla's 14000, where wealth starts adding raid points.
+        public int driftPlunderMinWealth = 14000;
 
         public override void ExposeData()
         {
             Scribe_Values.Look(ref caravanRaidChance, "caravanRaidChance", 0.3f);
             Scribe_Values.Look(ref aidPlunder, "aidPlunder", true);
             Scribe_Values.Look(ref bestowingPenalty, "bestowingPenalty", 15);
+            Scribe_Values.Look(ref driftPlunder, "driftPlunder", true);
+            Scribe_Values.Look(ref driftPlunderMinWealth, "driftPlunderMinWealth", 14000);
         }
     }
 
@@ -44,6 +52,10 @@ namespace WeazelBehaviorExperiments
             listing.Gap();
             listing.Label("WBE_BestowingPenalty".Translate(Settings.bestowingPenalty), tooltip: "WBE_BestowingPenalty_Desc".Translate());
             Settings.bestowingPenalty = Mathf.RoundToInt(listing.Slider(Settings.bestowingPenalty, 0f, 50f));
+            listing.Gap();
+            listing.CheckboxLabeled("WBE_DriftPlunder".Translate(), ref Settings.driftPlunder, "WBE_DriftPlunder_Desc".Translate());
+            listing.Label("WBE_DriftPlunderMinWealth".Translate(((float)Settings.driftPlunderMinWealth).ToStringMoney()), tooltip: "WBE_DriftPlunderMinWealth_Desc".Translate());
+            Settings.driftPlunderMinWealth = Mathf.RoundToInt(listing.Slider(Settings.driftPlunderMinWealth, 0f, 200000f) / 1000f) * 1000;
             listing.End();
         }
     }
@@ -65,5 +77,27 @@ namespace WeazelBehaviorExperiments
 
         public static bool NeutralWithPlayer(Faction xcc) =>
             xcc != null && !xcc.defeated && xcc.RelationKindWith(Faction.OfPlayer) == FactionRelationKind.Neutral;
+
+        // Spawns an XCC combat group at a map edge, walking in.
+        public static bool TrySpawnGroup(Map map, Faction xcc, float points, out List<Pawn> team)
+        {
+            var parms = new PawnGroupMakerParms
+            {
+                groupKind = PawnGroupKindDefOf.Combat,
+                tile = map.Tile,
+                faction = xcc,
+                points = Mathf.Max(points, xcc.def.MinPointsToGeneratePawnGroup(PawnGroupKindDefOf.Combat)),
+            };
+            team = PawnGroupMakerUtility.GeneratePawns(parms).ToList();
+            if (team.Count == 0) return false;
+            if (!RCellFinder.TryFindRandomPawnEntryCell(out IntVec3 entry, map, CellFinder.EdgeRoadChance_Hostile))
+            {
+                foreach (Pawn p in team) Find.WorldPawns.PassToWorld(p, PawnDiscardDecideMode.Discard);
+                return false;
+            }
+            foreach (Pawn p in team)
+                GenSpawn.Spawn(p, CellFinder.RandomClosewalkCellNear(entry, map, 8), map);
+            return true;
+        }
     }
 }

@@ -44,6 +44,7 @@ namespace WeazelBehaviorExperiments
     public static class WBE_DefOf
     {
         public static HistoryEventDef WBE_BestowingFailed;
+        public static HistoryEventDef WBE_DriftPlunder;
         public static DutyDef WBE_Plunder;
 
         static WBE_DefOf() => DefOfHelper.EnsureInitializedInCtor(typeof(WBE_DefOf));
