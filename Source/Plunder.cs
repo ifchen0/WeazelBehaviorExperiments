@@ -18,6 +18,8 @@ namespace WeazelBehaviorExperiments
         public bool settlesGoodwill;
         // Set for squads arriving at the map edge: walk here first, then loot.
         public IntVec3 travelTo = IntVec3.Invalid;
+        // Market value the whole squad may take. Negative: no limit.
+        public float budget = -1f;
         private float haul;
 
         // Stragglers that cannot reach the spot should not hold the others back forever.
@@ -39,8 +41,27 @@ namespace WeazelBehaviorExperiments
         public override void Notify_PawnLost(Pawn p, PawnLostCondition condition)
         {
             Thing load = p.carryTracker?.CarriedThing;
-            if (settlesGoodwill && condition == PawnLostCondition.ExitedMap && load != null && !(load is Pawn))
+            if (condition == PawnLostCondition.ExitedMap && load != null && !(load is Pawn))
                 haul += load.MarketValue * load.stackCount;
+        }
+
+        // Budget left after what is already gone, being carried, or picked by another member on the way to it.
+        // Recounted each time, so a load dropped by a downed member frees its share again.
+        public float RemainingBudget(Pawn asking)
+        {
+            if (budget < 0f) return float.PositiveInfinity;
+            float committed = haul;
+            foreach (Pawn p in lord.ownedPawns)
+            {
+                Thing carried = p.carryTracker?.CarriedThing;
+                if (carried != null)
+                {
+                    if (!(carried is Pawn)) committed += carried.MarketValue * carried.stackCount;
+                }
+                else if (p != asking && p.CurJobDef == JobDefOf.Steal && p.CurJob.targetA.Thing is Thing target)
+                    committed += target.MarketValue * Mathf.Min(p.CurJob.count, target.stackCount);
+            }
+            return budget - committed;
         }
 
         public override void Cleanup()
@@ -53,6 +74,7 @@ namespace WeazelBehaviorExperiments
             Scribe_Values.Look(ref throughDoors, "throughDoors");
             Scribe_Values.Look(ref settlesGoodwill, "settlesGoodwill");
             Scribe_Values.Look(ref travelTo, "travelTo", IntVec3.Invalid);
+            Scribe_Values.Look(ref budget, "budget", -1f);
             Scribe_Values.Look(ref haul, "haul");
         }
 
@@ -118,26 +140,37 @@ namespace WeazelBehaviorExperiments
             float radiusSquared = SearchRadius * SearchRadius;
             // As in vanilla stealing, items behind closed doors are off limits unless the lord allows doors,
             // so a closed storeroom protects its contents from strike teams.
-            bool throughDoors = (pawn.GetLord()?.LordJob as LordJob_WeazelPlunder)?.throughDoors ?? false;
+            var plunderJob = pawn.GetLord()?.LordJob as LordJob_WeazelPlunder;
+            bool throughDoors = plunderJob?.throughDoors ?? false;
+            // A squad with a budget takes only part of a stack that would overrun it, and skips single items that would.
+            float budget = plunderJob?.RemainingBudget(pawn) ?? float.PositiveInfinity;
+            if (budget < MinLoadValue) return null;
             TraverseParms traverse = throughDoors
                 ? TraverseParms.For(pawn, Danger.Some)
                 : TraverseParms.For(TraverseMode.NoPassClosedDoors, Danger.Some);
             Thing best = pawn.Map.listerThings.ThingsInGroup(ThingRequestGroup.HaulableEverOrMinifiable)
                 .Where(t => t.def.stealable && !t.IsBurning() && (t.Position - pawn.Position).LengthHorizontalSquared <= radiusSquared
-                    && LoadValue(t, capacity) >= MinLoadValue)
-                .OrderByDescending(t => LoadValue(t, capacity))
+                    && LoadValue(t, capacity, budget) >= MinLoadValue)
+                .OrderByDescending(t => LoadValue(t, capacity, budget))
                 .FirstOrDefault(t => pawn.CanReserve(t) && pawn.Map.reachability.CanReach(pawn.Position, t, PathEndMode.ClosestTouch, traverse));
             if (best == null) return null;
 
             Job job = JobMaker.MakeJob(JobDefOf.Steal, best, exit);
-            job.count = LoadCount(best, capacity);
+            job.count = LoadCount(best, capacity, budget);
             return job;
         }
 
-        private static int LoadCount(Thing t, float capacity) =>
-            Mathf.Max(1, Mathf.Min(t.stackCount, (int)(capacity / t.def.VolumePerUnit)));
+        // 0 when not even one unit fits the budget.
+        private static int LoadCount(Thing t, float capacity, float budget)
+        {
+            int count = Mathf.Max(1, Mathf.Min(t.stackCount, (int)(capacity / t.def.VolumePerUnit)));
+            float unitValue = t.MarketValue;
+            if (!float.IsPositiveInfinity(budget) && unitValue > 0f)
+                count = Mathf.Min(count, (int)(budget / unitValue));
+            return count;
+        }
 
-        private static float LoadValue(Thing t, float capacity) => t.MarketValue * LoadCount(t, capacity);
+        private static float LoadValue(Thing t, float capacity, float budget) => t.MarketValue * LoadCount(t, capacity, budget);
     }
 
     public static class PlunderUtility

@@ -34,6 +34,23 @@ namespace WeazelBehaviorExperiments
             AccessTools.MethodDelegate<System.Func<float, Faction, int>>(
                 AccessTools.Method(typeof(RimWorld.Planet.FactionGiftUtility), "PostProcessedGoodwillChange"));
 
+        // The haul can lift XCC to ally, no further: beyond that the colony would only be losing goods.
+        private const int GoodwillCeiling = 75;
+
+        // Silver needed to lift goodwill to the ceiling under the gift falloff, stepped as vanilla does.
+        // One extra step covers vanilla rounding down; Settle trims any overshoot.
+        private static float BudgetToCeiling(int goodwill)
+        {
+            SimpleCurve curve = DiplomacyTuning.GiftGoodwillFactorRelationsCurve;
+            float reached = goodwill, baseChange = 0.25f;
+            while (reached < GoodwillCeiling)
+            {
+                reached += 0.25f * curve.Evaluate(Mathf.Min(reached, 100f));
+                baseChange += 0.25f;
+            }
+            return baseChange * SilverPerGoodwill;
+        }
+
         // Set while applying the vanilla drift ourselves, so the patch lets it through.
         internal static bool applyingDrift;
 
@@ -58,7 +75,11 @@ namespace WeazelBehaviorExperiments
             else
             {
                 // Walk in to where caravans unload before looting: from the map edge nothing is in reach.
-                var job = new LordJob_WeazelPlunder(throughDoors: true, settlesGoodwill: true) { travelTo = DropCellFinder.TradeDropSpot(map) };
+                var job = new LordJob_WeazelPlunder(throughDoors: true, settlesGoodwill: true)
+                {
+                    travelTo = DropCellFinder.TradeDropSpot(map),
+                    budget = BudgetToCeiling(xcc.BaseGoodwillWith(player)),
+                };
                 LordMaker.MakeNewLord(xcc, job, map, team);
                 Messages.Message("WBE_DriftPlunderArrived".Translate(xcc.Named("FACTION")), new LookTargets(team), MessageTypeDefOf.NegativeEvent);
                 return true;
@@ -66,16 +87,23 @@ namespace WeazelBehaviorExperiments
             return false;
         }
 
-        // Goodwill for the haul, as if it were a gift. Nothing taken: the vanilla drift it replaced.
+        // Goodwill for the haul, as if it were a gift, up to the ceiling. Nothing taken: the vanilla drift it replaced.
         public static void Settle(Faction xcc, float haul)
         {
             Faction player = Faction.OfPlayer;
             if (xcc == null || xcc.defeated || xcc.HostileTo(player)) return;
             int gain = GiftFalloff(haul / SilverPerGoodwill, xcc);
+            if (gain <= 0)
+            {
+                ApplyVanillaDrift(xcc);
+                return;
+            }
+            // CalculateAdjustedGoodwillChange may scale the change, so shrink the request until it fits.
+            int room = GoodwillCeiling - xcc.BaseGoodwillWith(player);
+            while (gain > 0 && xcc.CalculateAdjustedGoodwillChange(player, gain) > room)
+                gain--;
             if (gain > 0)
                 xcc.TryAffectGoodwillWith(player, gain, canSendMessage: true, canSendHostilityLetter: false, reason: WBE_DefOf.WBE_DriftPlunder);
-            else
-                ApplyVanillaDrift(xcc);
         }
 
         // Same step as Faction.CheckReachNaturalGoodwill: at most 10, down to natural goodwill + 50.
