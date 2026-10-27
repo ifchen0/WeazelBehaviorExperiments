@@ -44,7 +44,7 @@ namespace WeazelBehaviorExperiments
             foreach (Lord lord in lords)
             {
                 if (lord.LordJob is LordJob_WeazelCaravanRaid raid && raid.ShouldPlunder())
-                    PlunderUtility.StartPlunder(lord, "WBE_CaravanRaidPlunder", throughDoors: false);
+                    CaravanRaidUtility.StartPlunder(lord);
             }
             CheckAidLords(lords);
         }
@@ -83,9 +83,13 @@ namespace WeazelBehaviorExperiments
                 if (lord.CurLordToil is LordToil_HuntEnemies) continue;
                 bool undamaged = !damagedAidLords.Contains(id);
                 Forget(id);
-                if (undamaged && WeazelBehaviorExperimentsMod.Settings.aidPlunder && XccUtility.IsXcc(lord.faction)
-                    && !lord.faction.HostileTo(Faction.OfPlayer))
+                if (!XccUtility.IsXcc(lord.faction) || lord.faction.HostileTo(Faction.OfPlayer)) continue;
+                ExperimentSettings settings = WeazelBehaviorExperimentsMod.Settings;
+                if (undamaged && settings.aidPlunder)
                     PlunderUtility.StartPlunder(lord, "WBE_AidPlunderMessage", throughDoors: true);
+                // A squad that fought takes the spoils of the fight instead: gear left lying outside storage.
+                else if (!undamaged && settings.aidSalvage)
+                    PlunderUtility.StartPlunder(lord, "WBE_AidSalvageMessage", new LordJob_WeazelPlunder(throughDoors: true) { battlefieldOnly = true });
             }
         }
 

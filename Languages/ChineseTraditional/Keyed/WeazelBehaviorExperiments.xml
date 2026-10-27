@@ -2,6 +2,10 @@
 <LanguageData>
   <WBE_CaravanRaidChance>敵對商隊引來突擊隊的機率：{0}</WBE_CaravanRaidChance>
   <WBE_CaravanRaidChance_Desc>殖民地與XCC保持中立時，每支與XCC敵對陣營的商隊，都有這個機率引來XCC突擊隊。設為0%即關閉。</WBE_CaravanRaidChance_Desc>
+  <WBE_StrikeTeamKidnap>突擊隊會帶走倒地的商隊成員</WBE_StrikeTeamKidnap>
+  <WBE_StrikeTeamKidnap_Desc>搜刮物資前，突擊隊會先把倒地的商隊成員帶走（XCC做奴隸買賣）。已被你救起、俘虜或安置在床上的人不受影響。</WBE_StrikeTeamKidnap_Desc>
+  <WBE_AidSalvage>參戰過的XCC支援隊離開時會拿走戰場裝備</WBE_AidSalvage>
+  <WBE_AidSalvage_Desc>用功績或通訊台召來的XCC支援隊，若受過傷，離開時會拿走倉庫以外地上的武器和衣物作為戰利品，不會動你的倉庫。</WBE_AidSalvage_Desc>
   <WBE_AidPlunder>毫髮無傷的XCC支援隊離開時會搜刮</WBE_AidPlunder>
   <WBE_AidPlunder_Desc>用功績或通訊台召來的XCC支援隊，若離開時沒有受到任何傷害，會拿走一定範圍內最值錢的物品（包括你倉庫裡的）。他們熟悉你的基地，會自己開門進去拿。</WBE_AidPlunder_Desc>
   <WBE_BestowingPenalty>XCC授勳儀式失敗時減少的好感度：{0}</WBE_BestowingPenalty>
@@ -13,6 +17,8 @@
 
   <WBE_CaravanRaidArrived>一支{XCC_name}突擊隊尾隨{CARAVAN_name}的商隊而來，準備襲擊商隊。</WBE_CaravanRaidArrived>
   <WBE_CaravanRaidPlunder>{FACTION_name}突擊隊離開前，正在搜刮物資。</WBE_CaravanRaidPlunder>
+  <WBE_CaravanRaidPlunderKidnap>{FACTION_name}突擊隊離開前，正在搜刮物資並帶走倒地的商隊成員。</WBE_CaravanRaidPlunderKidnap>
+  <WBE_AidSalvageMessage>{FACTION_name}支援隊離開前，正在拿走戰場上的武器和衣物作為戰利品。</WBE_AidSalvageMessage>
   <WBE_DriftPlunderArrived>{FACTION_name}派了一支小隊來「維持良好關係」，正要搜刮你的物資。</WBE_DriftPlunderArrived>
   <WBE_AidPlunderMessage>{FACTION_name}支援隊毫髮無傷，認為你在浪費他們的時間，離開前正在搜刮物資作為補償。</WBE_AidPlunderMessage>
 </LanguageData>

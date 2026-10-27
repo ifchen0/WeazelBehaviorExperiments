@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
-  <!-- Vanilla Steal duty with a wider, value-first item search. Digs out only when trapped, never through walls by choice. -->
+  <!-- Vanilla Steal duty with a wider, value-first item search. Digs out only when trapped, never through walls by choice.
+       Strike teams carry off the caravan's downed people first. -->
   <DutyDef>
     <defName>WBE_Plunder</defName>
     <thinkNode Class="ThinkNode_Priority">
       <subNodes>
+        <li Class="WeazelBehaviorExperiments.JobGiver_WeazelKidnap" />
         <li Class="WeazelBehaviorExperiments.JobGiver_WeazelSteal" />
         <li Class="JobGiver_ExitMapBest">
           <defaultLocomotion>Jog</defaultLocomotion>

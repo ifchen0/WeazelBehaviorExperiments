@@ -20,6 +20,10 @@ namespace WeazelBehaviorExperiments
         public IntVec3 travelTo = IntVec3.Invalid;
         // Market value the whole squad may take. Negative: no limit.
         public float budget = -1f;
+        // Squads that fought for the colony take only weapons and apparel left lying outside storage.
+        public bool battlefieldOnly;
+        // Strike teams carry these off (once downed) before grabbing goods: the caravan's own people.
+        public List<Pawn> kidnapTargets = new List<Pawn>();
         private float haul;
 
         // Stragglers that cannot reach the spot should not hold the others back forever.
@@ -76,7 +80,19 @@ namespace WeazelBehaviorExperiments
             Scribe_Values.Look(ref travelTo, "travelTo", IntVec3.Invalid);
             Scribe_Values.Look(ref budget, "budget", -1f);
             Scribe_Values.Look(ref haul, "haul");
+            Scribe_Values.Look(ref battlefieldOnly, "battlefieldOnly");
+            Scribe_Collections.Look(ref kidnapTargets, "kidnapTargets", LookMode.Reference);
+            if (Scribe.mode == LoadSaveMode.PostLoadInit)
+            {
+                kidnapTargets ??= new List<Pawn>();
+                kidnapTargets.RemoveAll(p => p == null);
+            }
         }
+
+        // Kidnap targets the given pawn could carry off right now (vanilla Kidnap job fails once they get up).
+        public bool CanKidnap(Pawn kidnapper, Pawn victim) =>
+            victim.Spawned && victim.Map == kidnapper.Map && victim.Downed && !victim.Dead && !victim.IsPrisoner
+            && !victim.InBed() && victim.Faction != null && victim.Faction.HostileTo(kidnapper.Faction);
 
         public override StateGraph CreateGraph()
         {
@@ -125,7 +141,7 @@ namespace WeazelBehaviorExperiments
     // good item. This one looks much further and takes whatever is worth the most in one load.
     public class JobGiver_WeazelSteal : ThinkNode_JobGiver
     {
-        private const float SearchRadius = 45f;
+        public const float SearchRadius = 45f;
         // Same floor as vanilla stealing: smaller loads are not worth the trip.
         private const float MinLoadValue = 320f;
 
@@ -142,6 +158,7 @@ namespace WeazelBehaviorExperiments
             // so a closed storeroom protects its contents from strike teams.
             var plunderJob = pawn.GetLord()?.LordJob as LordJob_WeazelPlunder;
             bool throughDoors = plunderJob?.throughDoors ?? false;
+            bool battlefieldOnly = plunderJob?.battlefieldOnly ?? false;
             // A squad with a budget takes only part of a stack that would overrun it, and skips single items that would.
             float budget = plunderJob?.RemainingBudget(pawn) ?? float.PositiveInfinity;
             if (budget < MinLoadValue) return null;
@@ -150,6 +167,7 @@ namespace WeazelBehaviorExperiments
                 : TraverseParms.For(TraverseMode.NoPassClosedDoors, Danger.Some);
             Thing best = pawn.Map.listerThings.ThingsInGroup(ThingRequestGroup.HaulableEverOrMinifiable)
                 .Where(t => t.def.stealable && !t.IsBurning() && (t.Position - pawn.Position).LengthHorizontalSquared <= radiusSquared
+                    && (!battlefieldOnly || (t.def.IsWeapon || t.def.IsApparel) && !t.IsInAnyStorage())
                     && LoadValue(t, capacity, budget) >= MinLoadValue)
                 .OrderByDescending(t => LoadValue(t, capacity, budget))
                 .FirstOrDefault(t => pawn.CanReserve(t) && pawn.Map.reachability.CanReach(pawn.Position, t, PathEndMode.ClosestTouch, traverse));
@@ -173,10 +191,41 @@ namespace WeazelBehaviorExperiments
         private static float LoadValue(Thing t, float capacity, float budget) => t.MarketValue * LoadCount(t, capacity, budget);
     }
 
+    // Vanilla JobGiver_Kidnap only takes downed colonists. This one takes the plunder lord's own targets.
+    public class JobGiver_WeazelKidnap : ThinkNode_JobGiver
+    {
+        protected override Job TryGiveJob(Pawn pawn)
+        {
+            var plunderJob = pawn.GetLord()?.LordJob as LordJob_WeazelPlunder;
+            if (plunderJob == null || plunderJob.kidnapTargets.Count == 0) return null;
+            if (!pawn.health.capacities.CapableOf(PawnCapacityDefOf.Manipulation) || GenAI.InDangerousCombat(pawn))
+                return null;
+            if (!RCellFinder.TryFindBestExitSpot(pawn, out IntVec3 exit))
+                return null;
+
+            float radiusSquared = JobGiver_WeazelSteal.SearchRadius * JobGiver_WeazelSteal.SearchRadius;
+            TraverseParms traverse = plunderJob.throughDoors
+                ? TraverseParms.For(pawn, Danger.Some)
+                : TraverseParms.For(TraverseMode.NoPassClosedDoors, Danger.Some);
+            Pawn victim = plunderJob.kidnapTargets
+                .Where(v => plunderJob.CanKidnap(pawn, v) && (v.Position - pawn.Position).LengthHorizontalSquared <= radiusSquared)
+                .OrderBy(v => (v.Position - pawn.Position).LengthHorizontalSquared)
+                .FirstOrDefault(v => pawn.CanReserve(v) && pawn.Map.reachability.CanReach(pawn.Position, v, PathEndMode.OnCell, traverse));
+            if (victim == null) return null;
+
+            Job job = JobMaker.MakeJob(JobDefOf.Kidnap, victim, exit);
+            job.count = 1;
+            return job;
+        }
+    }
+
     public static class PlunderUtility
     {
         // Moves the lord's pawns into a plunder lord. The old lord is removed once empty.
-        public static void StartPlunder(Lord oldLord, string messageKey, bool throughDoors)
+        public static void StartPlunder(Lord oldLord, string messageKey, bool throughDoors) =>
+            StartPlunder(oldLord, messageKey, new LordJob_WeazelPlunder(throughDoors));
+
+        public static void StartPlunder(Lord oldLord, string messageKey, LordJob_WeazelPlunder plunderJob)
         {
             Map map = oldLord.Map;
             Faction faction = oldLord.faction;
@@ -188,7 +237,7 @@ namespace WeazelBehaviorExperiments
             if (oldLord.ownedPawns.Count == 0)
                 map.lordManager.RemoveLord(oldLord);
 
-            LordMaker.MakeNewLord(faction, new LordJob_WeazelPlunder(throughDoors), map, pawns);
+            LordMaker.MakeNewLord(faction, plunderJob, map, pawns);
             Messages.Message(messageKey.Translate(faction.Named("FACTION")), new LookTargets(pawns), MessageTypeDefOf.NegativeEvent);
         }
     }

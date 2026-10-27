@@ -19,6 +19,7 @@ namespace WeazelBehaviorExperiments
         private List<Pawn> caravanMembers = new List<Pawn>();
 
         public Faction TargetFaction => targetFaction;
+        public IEnumerable<Pawn> CaravanMembers => caravanMembers;
 
         public LordJob_WeazelCaravanRaid()
         {
@@ -86,6 +87,17 @@ namespace WeazelBehaviorExperiments
             Faction f = caravanLord.faction;
             return f != null && f != xcc && !f.IsPlayer && XccUtility.NeutralWithPlayer(xcc) && f.HostileTo(xcc)
                 && !f.HostileTo(Faction.OfPlayer) && caravanLord.Map.IsPlayerHome;
+        }
+
+        // XCC buys slaves, so the strike team takes the caravan's downed people along with the goods.
+        public static void StartPlunder(Lord raidLord)
+        {
+            var plunderJob = new LordJob_WeazelPlunder(throughDoors: false);
+            if (WeazelBehaviorExperimentsMod.Settings.strikeTeamKidnap && raidLord.LordJob is LordJob_WeazelCaravanRaid raid)
+                plunderJob.kidnapTargets = raid.CaravanMembers.ToList();
+            Pawn anyMember = raidLord.ownedPawns.FirstOrDefault();
+            bool kidnapping = anyMember != null && plunderJob.kidnapTargets.Any(v => plunderJob.CanKidnap(anyMember, v));
+            PlunderUtility.StartPlunder(raidLord, kidnapping ? "WBE_CaravanRaidPlunderKidnap" : "WBE_CaravanRaidPlunder", plunderJob);
         }
 
         public static bool TrySpawnStrikeTeam(Lord caravanLord)

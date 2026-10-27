@@ -12,10 +12,10 @@ Small experimental behaviours for the XCC faction of Weazel Mode.
 These scenarios are my own take on how the Weazels would act, based on my impression of the faction. They are not part of the original mod's lore and are not endorsed by its author.
 
 Protection racket
-While your colony is neutral with XCC, a trade caravan from a faction hostile to XCC may draw an XCC strike team onto your map. The team hunts the caravan, and once the caravan is gone (defeated or left) it grabs valuables lying nearby before leaving. XCC treats a neutral colony as its own turf.
+While your colony is neutral with XCC, a trade caravan from a faction hostile to XCC may draw an XCC strike team onto your map. The team hunts the caravan, and once the caravan is gone (defeated or left) it carries off the caravan's downed people and grabs valuables lying nearby before leaving. XCC treats a neutral colony as its own turf, and deals in slaves.
 
 Wasted time
-An XCC squad called in with favor, or requested from an allied XCC on the comms console, that leaves without taking any damage grabs valuables near it before leaving. They feel you wasted their time.
+An XCC squad called in with favor, or requested from an allied XCC on the comms console, that leaves without taking any damage grabs valuables near it before leaving. They feel you wasted their time. A squad that did fight takes the weapons and apparel left lying outside your storage instead, as spoils of the fight.
 
 Failed ceremony
 XCC blames you for any failed bestowing ceremony, whether you let it expire, a raid broke it up or someone died, and takes goodwill for it (15 by default). It never drops goodwill low enough to turn XCC hostile, since a war would break out with their officer still on your map.
