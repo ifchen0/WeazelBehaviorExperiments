@@ -26,8 +26,13 @@ namespace WeazelBehaviorExperiments
 
     public static class DriftPlunderUtility
     {
-        // Vanilla gift rate (FactionGiftUtility). Its falloff only starts above 0 goodwill, where the gain is capped.
+        // Vanilla gift rate (FactionGiftUtility.GetBaseGoodwillChange).
         private const float SilverPerGoodwill = 40f;
+
+        // Vanilla gift falloff: full rate up to 0 goodwill, a quarter at 75, at most 200 per gift.
+        private static readonly System.Func<float, Faction, int> GiftFalloff =
+            AccessTools.MethodDelegate<System.Func<float, Faction, int>>(
+                AccessTools.Method(typeof(RimWorld.Planet.FactionGiftUtility), "PostProcessedGoodwillChange"));
 
         // Set while applying the vanilla drift ourselves, so the patch lets it through.
         internal static bool applyingDrift;
@@ -59,23 +64,16 @@ namespace WeazelBehaviorExperiments
             return false;
         }
 
-        // Goodwill for the haul, up to 0. Nothing taken: the vanilla drift it replaced.
+        // Goodwill for the haul, as if it were a gift. Nothing taken: the vanilla drift it replaced.
         public static void Settle(Faction xcc, float haul)
         {
             Faction player = Faction.OfPlayer;
             if (xcc == null || xcc.defeated || xcc.HostileTo(player)) return;
-            int gain = Mathf.FloorToInt(haul / SilverPerGoodwill);
-            if (gain <= 0)
-            {
-                ApplyVanillaDrift(xcc);
-                return;
-            }
-            // CalculateAdjustedGoodwillChange may scale the change, so shrink the request until it fits under 0.
-            int room = -xcc.BaseGoodwillWith(player);
-            while (gain > 0 && xcc.CalculateAdjustedGoodwillChange(player, gain) > room)
-                gain--;
+            int gain = GiftFalloff(haul / SilverPerGoodwill, xcc);
             if (gain > 0)
                 xcc.TryAffectGoodwillWith(player, gain, canSendMessage: true, canSendHostilityLetter: false, reason: WBE_DefOf.WBE_DriftPlunder);
+            else
+                ApplyVanillaDrift(xcc);
         }
 
         // Same step as Faction.CheckReachNaturalGoodwill: at most 10, down to natural goodwill + 50.

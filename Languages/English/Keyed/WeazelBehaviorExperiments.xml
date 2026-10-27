@@ -7,7 +7,7 @@
   <WBE_BestowingPenalty>Goodwill lost when an XCC bestowing ceremony fails: {0}</WBE_BestowingPenalty>
   <WBE_BestowingPenalty_Desc>XCC blames you for any failed bestowing ceremony, whatever went wrong. The loss never takes goodwill low enough to turn XCC hostile. 0 turns it off.</WBE_BestowingPenalty_Desc>
   <WBE_DriftPlunder>XCC loots instead of drifting goodwill down</WBE_DriftPlunder>
-  <WBE_DriftPlunder_Desc>Every 50 days vanilla drifts XCC's goodwill 10 towards its natural level. If XCC is neutral with you, goodwill is below 0 and your colony is rich enough, XCC sends a squad to loot instead (they open your doors). What they carry off buys goodwill back at the vanilla gift rate (40 silver = 1), up to 0. If they take nothing, the vanilla drift applies.</WBE_DriftPlunder_Desc>
+  <WBE_DriftPlunder_Desc>Every 50 days vanilla drifts XCC's goodwill 10 towards its natural level. If XCC is neutral with you, goodwill is below 0 and your colony is rich enough, XCC sends a squad to loot instead (they open your doors). What they carry off buys goodwill back as a vanilla gift would (40 silver = 1 while goodwill is at or below 0, less the friendlier XCC is). If they take nothing, the vanilla drift applies.</WBE_DriftPlunder_Desc>
   <WBE_DriftPlunderMinWealth>Minimum colony wealth for XCC looters: {0}</WBE_DriftPlunderMinWealth>
   <WBE_DriftPlunderMinWealth_Desc>Checked on your richest home map. Below it, the vanilla drift applies. The default 14000 is where vanilla wealth starts adding raid points.</WBE_DriftPlunderMinWealth_Desc>
 
