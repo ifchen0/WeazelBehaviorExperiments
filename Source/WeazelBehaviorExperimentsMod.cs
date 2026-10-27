@@ -89,6 +89,23 @@ namespace WeazelBehaviorExperiments
                 points = Mathf.Max(points, xcc.def.MinPointsToGeneratePawnGroup(PawnGroupKindDefOf.Combat)),
             };
             team = PawnGroupMakerUtility.GeneratePawns(parms).ToList();
+            return TrySpawnAtEdge(map, team);
+        }
+
+        // Spawns the squad an XCC_CallSquad permit sends: Weazel turns the placeholder kind into random real ones.
+        public static bool TrySpawnAidSquad(Map map, Faction xcc, out List<Pawn> team)
+        {
+            const int SquadSize = 10;
+            PawnKindDef kind = DefDatabase<PawnKindDef>.GetNamedSilentFail("Weazel_Aid_Squad");
+            if (kind == null) return TrySpawnGroup(map, xcc, 0f, out team);
+            team = new List<Pawn>();
+            for (int i = 0; i < SquadSize; i++)
+                team.Add(PawnGenerator.GeneratePawn(new PawnGenerationRequest(kind, xcc, PawnGenerationContext.NonPlayer, tile: map.Tile)));
+            return TrySpawnAtEdge(map, team);
+        }
+
+        private static bool TrySpawnAtEdge(Map map, List<Pawn> team)
+        {
             if (team.Count == 0) return false;
             if (!RCellFinder.TryFindRandomPawnEntryCell(out IntVec3 entry, map, CellFinder.EdgeRoadChance_Hostile))
             {

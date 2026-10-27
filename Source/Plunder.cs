@@ -16,7 +16,12 @@ namespace WeazelBehaviorExperiments
         public bool throughDoors;
         // Drift looters: what they carry off settles goodwill once the last of them is gone.
         public bool settlesGoodwill;
+        // Set for squads arriving at the map edge: walk here first, then loot.
+        public IntVec3 travelTo = IntVec3.Invalid;
         private float haul;
+
+        // Stragglers that cannot reach the spot should not hold the others back forever.
+        private const int TravelGiveUpTicks = 5000;
 
         public LordJob_WeazelPlunder()
         {
@@ -47,18 +52,34 @@ namespace WeazelBehaviorExperiments
         {
             Scribe_Values.Look(ref throughDoors, "throughDoors");
             Scribe_Values.Look(ref settlesGoodwill, "settlesGoodwill");
+            Scribe_Values.Look(ref travelTo, "travelTo", IntVec3.Invalid);
             Scribe_Values.Look(ref haul, "haul");
         }
 
         public override StateGraph CreateGraph()
         {
             var graph = new StateGraph();
+            LordToil_Travel travel = null;
+            if (travelTo.IsValid)
+            {
+                travel = new LordToil_Travel(travelTo) { useAvoidGrid = true };
+                graph.AddToil(travel);
+            }
             var plunder = new LordToil_WeazelPlunder { useAvoidGrid = true };
             graph.AddToil(plunder);
             var assault = new LordToil_AssaultColony();
             graph.AddToil(assault);
+
             var turnHostile = new Transition(plunder, assault);
             turnHostile.AddTrigger(new Trigger_BecamePlayerEnemy());
+            if (travel != null)
+            {
+                turnHostile.AddSource(travel);
+                var arrived = new Transition(travel, plunder);
+                arrived.AddTrigger(new Trigger_Memo("TravelArrived"));
+                arrived.AddTrigger(new Trigger_TicksPassed(TravelGiveUpTicks));
+                graph.AddTransition(arrived);
+            }
             graph.AddTransition(turnHostile);
             return graph;
         }

@@ -53,11 +53,13 @@ namespace WeazelBehaviorExperiments
                 failReason = "XCC must be neutral with goodwill below 0";
             else if (map == null || map.wealthWatcher.WealthTotal < WeazelBehaviorExperimentsMod.Settings.driftPlunderMinWealth)
                 failReason = "no player home map above the wealth setting";
-            else if (!XccUtility.TrySpawnGroup(map, xcc, StorytellerUtility.DefaultThreatPointsNow(map), out var team))
+            else if (!XccUtility.TrySpawnAidSquad(map, xcc, out var team))
                 failReason = "could not spawn the squad";
             else
             {
-                LordMaker.MakeNewLord(xcc, new LordJob_WeazelPlunder(throughDoors: true, settlesGoodwill: true), map, team);
+                // Walk in to where caravans unload before looting: from the map edge nothing is in reach.
+                var job = new LordJob_WeazelPlunder(throughDoors: true, settlesGoodwill: true) { travelTo = DropCellFinder.TradeDropSpot(map) };
+                LordMaker.MakeNewLord(xcc, job, map, team);
                 Messages.Message("WBE_DriftPlunderArrived".Translate(xcc.Named("FACTION")), new LookTargets(team), MessageTypeDefOf.NegativeEvent);
                 return true;
             }
