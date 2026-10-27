@@ -34,8 +34,9 @@ namespace WeazelBehaviorExperiments
             AccessTools.MethodDelegate<System.Func<float, Faction, int>>(
                 AccessTools.Method(typeof(RimWorld.Planet.FactionGiftUtility), "PostProcessedGoodwillChange"));
 
-        // The haul can lift XCC to ally, no further: beyond that the colony would only be losing goods.
-        private const int GoodwillCeiling = 75;
+        // The haul can lift XCC a little past ally (75), no further: beyond that the colony would only be losing goods.
+        // Aiming at 75 itself fell short, since the squad never uses the last few hundred silver of its budget.
+        private const int GoodwillCeiling = 80;
 
         // Silver needed to lift goodwill to the ceiling under the gift falloff, stepped as vanilla does.
         // One extra step covers vanilla rounding down; Settle trims any overshoot.

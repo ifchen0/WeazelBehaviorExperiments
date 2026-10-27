@@ -7,7 +7,7 @@
   <WBE_BestowingPenalty>XCC授勳儀式失敗時減少的好感度：{0}</WBE_BestowingPenalty>
   <WBE_BestowingPenalty_Desc>不論原因為何，XCC都會把授勳儀式失敗算在你頭上。扣減後的好感度不會低到讓XCC轉為敵對。設為0即關閉。</WBE_BestowingPenalty_Desc>
   <WBE_DriftPlunder>XCC以搜刮代替好感度自然下滑</WBE_DriftPlunder>
-  <WBE_DriftPlunder_Desc>原版每50天會讓XCC的好感度往長期好感度下滑10點。若XCC與你中立、好感度低於0，且你的殖民地夠富裕，XCC會改派一支小隊來搜刮（會自己開門）。帶走的物資照原版送禮算法換回好感度（好感度0以下時40銀=1點，越友好換得越少）。整隊只拿到剛好讓好感度回到75（同盟）的量；什麼都沒拿到就照原版下滑。</WBE_DriftPlunder_Desc>
+  <WBE_DriftPlunder_Desc>原版每50天會讓XCC的好感度往長期好感度下滑10點。若XCC與你中立、好感度低於0，且你的殖民地夠富裕，XCC會改派一支小隊來搜刮（會自己開門）。帶走的物資照原版送禮算法換回好感度（好感度0以下時40銀=1點，越友好換得越少）。整隊最多只拿到讓好感度回到80的量（75以上即為同盟）；什麼都沒拿到就照原版下滑。</WBE_DriftPlunder_Desc>
   <WBE_DriftPlunderMinWealth>XCC來搜刮的最低殖民地財富：{0}</WBE_DriftPlunderMinWealth>
   <WBE_DriftPlunderMinWealth_Desc>以財富最高的玩家基地計算，低於這個值時照原版好感度下滑。預設14000是原版財富開始增加襲擊點數的門檻。</WBE_DriftPlunderMinWealth_Desc>
 
