@@ -11,11 +11,14 @@ An XCC squad called in with favor, or requested from an allied XCC on the comms 
 [h2]Failed ceremony[/h2]
 XCC blames you for any failed bestowing ceremony, whether you let it expire, a raid broke it up or someone died, and takes goodwill for it (15 by default). It never drops goodwill low enough to turn XCC hostile, since a war would break out with their officer still on your map.
 
+[h2]Keeping relations good[/h2]
+Left alone, a neutral XCC drifts towards war: every 50 days vanilla lowers its goodwill by 10. If XCC's goodwill is below 0 and your colony is worth at least 14,000 silver, XCC sends a 10-member squad to "keep relations good" instead. They walk in to where caravans unload, loot and leave. What they carry off buys goodwill back as a vanilla gift would (40 silver per point at 0 or below, less above that). If they leave empty-handed, the usual drop applies.
+
 [h2]Notes[/h2][list]
 [*]Each member carries off the most valuable load within a wide radius, a defeated caravan's goods and your stockpiles alike, or leaves empty-handed. Strike teams leave closed rooms alone; a squad you called in knows its way around and opens your doors.
 [*]A message in the top-left corner explains each event when it starts (no letters).
 [*]Attacking the team turns XCC hostile, as with any neutral visitor.
-[*]The caravan chance, the wasted-time behaviour and the ceremony goodwill loss can be changed in the mod settings.
+[*]The caravan chance, the wasted-time behaviour, the ceremony goodwill loss and the relations squad (with its wealth threshold) can be changed in the mod settings.
 [*]Safe to add to an existing save. Remove it only when no XCC strike team or collecting squad is on the map.
 [/list]
 [hr][/hr]

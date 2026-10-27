@@ -20,6 +20,9 @@ An XCC squad called in with favor, or requested from an allied XCC on the comms 
 Failed ceremony
 XCC blames you for any failed bestowing ceremony, whether you let it expire, a raid broke it up or someone died, and takes goodwill for it (15 by default). It never drops goodwill low enough to turn XCC hostile, since a war would break out with their officer still on your map.
 
+Keeping relations good
+Left alone, a neutral XCC drifts towards war: every 50 days vanilla lowers its goodwill by 10. If XCC's goodwill is below 0 and your colony is worth at least 14,000 silver, XCC sends a 10-member squad to "keep relations good" instead. They walk in to where caravans unload, loot and leave. What they carry off buys goodwill back as a vanilla gift would. If they leave empty-handed, the usual drop applies.
+
 Notes
 - Each member carries off the most valuable load within a wide radius, your stockpiles included, or leaves empty-handed. Strike teams leave closed rooms alone; a squad you called in knows its way around and opens your doors.
 - A message in the top-left corner explains each event when it starts (no letters).
