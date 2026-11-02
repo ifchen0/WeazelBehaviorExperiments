@@ -86,7 +86,7 @@ namespace WeazelBehaviorExperiments
                 if (lord.LordJob is LordJob_WeazelCaravanRaid)
                     CaravanRaidUtility.StartPlunder(lord);
                 else
-                    PlunderUtility.StartPlunder(lord, "WBE_AidPlunderMessage", throughDoors: true);
+                    PlunderUtility.StartPlunder(lord, "WBE_AidPlunderMessage", new LordJob_WeazelPlunder(throughDoors: true) { silverOnly = true });
             }
         }
     }

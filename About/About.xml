@@ -15,16 +15,16 @@ Protection racket
 While your colony is neutral with XCC, a trade caravan from a faction hostile to XCC may draw an XCC strike team onto your map. The team hunts the caravan, and once the caravan is gone (defeated or left) it carries off the caravan's downed people and grabs valuables lying nearby before leaving. XCC treats a neutral colony as its own turf, and deals in slaves.
 
 Wasted time
-An XCC squad called in with favor, or requested from an allied XCC on the comms console, that leaves without taking any damage grabs valuables near it before leaving. They feel you wasted their time. A squad that did fight takes the weapons and apparel left lying outside your storage instead, as spoils of the fight.
+An XCC squad called in with favor, or requested from an allied XCC on the comms console, that leaves without taking any damage takes silver from anywhere on your map before leaving, leaving other goods alone. They feel you wasted their time. A squad that did fight takes the weapons and apparel left lying outside your storage instead, as spoils of the fight.
 
 Failed ceremony
 XCC blames you for any failed bestowing ceremony, whether you let it expire, a raid broke it up or someone died, and takes goodwill for it (15 by default). It never drops goodwill low enough to turn XCC hostile, since a war would break out with their officer still on your map.
 
 Keeping relations good
-Left alone, a neutral XCC drifts towards war: every 50 days vanilla lowers its goodwill by 10. If XCC's goodwill is below 0 and your colony is worth at least 14,000 silver, XCC sends a 10-member squad to "keep relations good" instead. They walk in to where caravans unload, loot and leave. What they carry off buys goodwill back as a vanilla gift would, and the squad takes no more than it needs to bring XCC up to 80, just past an alliance at 75. If they leave empty-handed, the usual drop applies.
+Left alone, a neutral XCC drifts towards war: every 50 days vanilla lowers its goodwill by 10. If XCC's goodwill is below 0 and your colony is worth at least 14,000 silver, XCC sends a 10-member squad to "keep relations good" instead. They walk in to where caravans unload, take silver from anywhere on the map and leave. The silver buys goodwill back as a vanilla gift would, and the squad takes no more than it needs to bring XCC up to 80, just past an alliance at 75. If they find no silver, the usual drop applies.
 
 Notes
-- Each member carries off the most valuable load within a wide radius, your stockpiles included, or leaves empty-handed. Strike teams leave closed rooms alone; a squad you called in knows its way around and opens your doors.
+- A strike team member carries off the most valuable load within a wide radius, your stockpiles included, or leaves empty-handed. Squads collecting from you take one stack of silver each. Strike teams leave closed rooms alone; a squad you called in knows its way around and opens your doors.
 - A message in the top-left corner explains each event when it starts (no letters).
 - Attacking the team turns XCC hostile, as with any neutral visitor.
 - Safe to add to an existing save. Remove it only when no XCC strike team or collecting squad is on the map.</description>

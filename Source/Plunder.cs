@@ -10,6 +10,7 @@ namespace WeazelBehaviorExperiments
 {
     // Grab valuables, then leave. Each pawn takes the most valuable load it can carry within a wide radius
     // and walks off the map with it (vanilla Steal job), or simply leaves when nothing is worth taking.
+    // Squads collecting from the colony itself take silver only.
     public class LordJob_WeazelPlunder : LordJob
     {
         // Invited squads know their way around the colony and open its doors; strike teams leave closed rooms alone.
@@ -22,6 +23,8 @@ namespace WeazelBehaviorExperiments
         public float budget = -1f;
         // Squads that fought for the colony take only weapons and apparel left lying outside storage.
         public bool battlefieldOnly;
+        // Squads taking compensation from the colony take silver only, anywhere on the map, to spare the player's goods.
+        public bool silverOnly;
         // Strike teams carry these off (once downed) before grabbing goods: the caravan's own people.
         public List<Pawn> kidnapTargets = new List<Pawn>();
         private float haul;
@@ -81,6 +84,7 @@ namespace WeazelBehaviorExperiments
             Scribe_Values.Look(ref budget, "budget", -1f);
             Scribe_Values.Look(ref haul, "haul");
             Scribe_Values.Look(ref battlefieldOnly, "battlefieldOnly");
+            Scribe_Values.Look(ref silverOnly, "silverOnly");
             Scribe_Collections.Look(ref kidnapTargets, "kidnapTargets", LookMode.Reference);
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {
@@ -153,22 +157,26 @@ namespace WeazelBehaviorExperiments
                 return null;
 
             float capacity = pawn.GetStatValue(StatDefOf.CarryingCapacity);
-            float radiusSquared = SearchRadius * SearchRadius;
             // As in vanilla stealing, items behind closed doors are off limits unless the lord allows doors,
             // so a closed storeroom protects its contents from strike teams.
             var plunderJob = pawn.GetLord()?.LordJob as LordJob_WeazelPlunder;
             bool throughDoors = plunderJob?.throughDoors ?? false;
             bool battlefieldOnly = plunderJob?.battlefieldOnly ?? false;
+            bool silverOnly = plunderJob?.silverOnly ?? false;
+            // Silver is searched map-wide and any amount counts, so the squad rarely leaves empty-handed.
+            float radiusSquared = silverOnly ? float.PositiveInfinity : SearchRadius * SearchRadius;
+            float minLoadValue = silverOnly ? 0f : MinLoadValue;
             // A squad with a budget takes only part of a stack that would overrun it, and skips single items that would.
             float budget = plunderJob?.RemainingBudget(pawn) ?? float.PositiveInfinity;
-            if (budget < MinLoadValue) return null;
+            if (budget < minLoadValue) return null;
             TraverseParms traverse = throughDoors
                 ? TraverseParms.For(pawn, Danger.Some)
                 : TraverseParms.For(TraverseMode.NoPassClosedDoors, Danger.Some);
             Thing best = pawn.Map.listerThings.ThingsInGroup(ThingRequestGroup.HaulableEverOrMinifiable)
                 .Where(t => t.def.stealable && !t.IsBurning() && (t.Position - pawn.Position).LengthHorizontalSquared <= radiusSquared
                     && (!battlefieldOnly || (t.def.IsWeapon || t.def.IsApparel) && !t.IsInAnyStorage())
-                    && LoadValue(t, capacity, budget) >= MinLoadValue)
+                    && (!silverOnly || t.def == ThingDefOf.Silver)
+                    && LoadValue(t, capacity, budget) > 0f && LoadValue(t, capacity, budget) >= minLoadValue)
                 .OrderByDescending(t => LoadValue(t, capacity, budget))
                 .FirstOrDefault(t => pawn.CanReserve(t) && pawn.Map.reachability.CanReach(pawn.Position, t, PathEndMode.ClosestTouch, traverse));
             if (best == null) return null;
@@ -222,9 +230,6 @@ namespace WeazelBehaviorExperiments
     public static class PlunderUtility
     {
         // Moves the lord's pawns into a plunder lord. The old lord is removed once empty.
-        public static void StartPlunder(Lord oldLord, string messageKey, bool throughDoors) =>
-            StartPlunder(oldLord, messageKey, new LordJob_WeazelPlunder(throughDoors));
-
         public static void StartPlunder(Lord oldLord, string messageKey, LordJob_WeazelPlunder plunderJob)
         {
             Map map = oldLord.Map;

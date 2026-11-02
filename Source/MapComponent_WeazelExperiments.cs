@@ -86,7 +86,7 @@ namespace WeazelBehaviorExperiments
                 if (!XccUtility.IsXcc(lord.faction) || lord.faction.HostileTo(Faction.OfPlayer)) continue;
                 ExperimentSettings settings = WeazelBehaviorExperimentsMod.Settings;
                 if (undamaged && settings.aidPlunder)
-                    PlunderUtility.StartPlunder(lord, "WBE_AidPlunderMessage", throughDoors: true);
+                    PlunderUtility.StartPlunder(lord, "WBE_AidPlunderMessage", new LordJob_WeazelPlunder(throughDoors: true) { silverOnly = true });
                 // A squad that fought takes the spoils of the fight instead: gear left lying outside storage.
                 else if (!undamaged && settings.aidSalvage)
                     PlunderUtility.StartPlunder(lord, "WBE_AidSalvageMessage", new LordJob_WeazelPlunder(throughDoors: true) { battlefieldOnly = true });

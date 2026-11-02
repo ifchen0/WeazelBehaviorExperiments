@@ -6,12 +6,12 @@
   <WBE_StrikeTeamKidnap_Desc>Before looting, the strike team takes the caravan's downed people with it (XCC deals in slaves). Anyone you have already taken in, captured or put in a bed is left alone.</WBE_StrikeTeamKidnap_Desc>
   <WBE_AidSalvage>XCC squads that fought take battlefield gear when leaving</WBE_AidSalvage>
   <WBE_AidSalvage_Desc>An XCC squad called in with favor or requested on the comms console that took damage takes weapons and apparel lying outside your storage on the way out, as spoils of the fight. Stockpiles are left alone.</WBE_AidSalvage_Desc>
-  <WBE_AidPlunder>Unharmed XCC squads plunder when leaving</WBE_AidPlunder>
-  <WBE_AidPlunder_Desc>An XCC squad called in with favor or requested on the comms console that leaves without taking any damage carries off the most valuable loads within a wide radius, stockpiles included, on the way out. They know their way around and open your doors.</WBE_AidPlunder_Desc>
+  <WBE_AidPlunder>Unharmed XCC squads take silver when leaving</WBE_AidPlunder>
+  <WBE_AidPlunder_Desc>An XCC squad called in with favor or requested on the comms console that leaves without taking any damage carries off silver from anywhere on the map, stockpiles included, on the way out. Other goods are left alone. They know their way around and open your doors.</WBE_AidPlunder_Desc>
   <WBE_BestowingPenalty>Goodwill lost when an XCC bestowing ceremony fails: {0}</WBE_BestowingPenalty>
   <WBE_BestowingPenalty_Desc>XCC blames you for any failed bestowing ceremony, whatever went wrong. The loss never takes goodwill low enough to turn XCC hostile. 0 turns it off.</WBE_BestowingPenalty_Desc>
-  <WBE_DriftPlunder>XCC loots instead of drifting goodwill down</WBE_DriftPlunder>
-  <WBE_DriftPlunder_Desc>Every 50 days vanilla drifts XCC's goodwill 10 towards its natural level. If XCC is neutral with you, goodwill is below 0 and your colony is rich enough, XCC sends a squad to loot instead (they open your doors). What they carry off buys goodwill back as a vanilla gift would (40 silver = 1 while goodwill is at or below 0, less the friendlier XCC is). The squad takes no more than it needs to reach 80 (75 is an alliance). If they take nothing, the vanilla drift applies.</WBE_DriftPlunder_Desc>
+  <WBE_DriftPlunder>XCC takes silver instead of drifting goodwill down</WBE_DriftPlunder>
+  <WBE_DriftPlunder_Desc>Every 50 days vanilla drifts XCC's goodwill 10 towards its natural level. If XCC is neutral with you, goodwill is below 0 and your colony is rich enough, XCC sends a squad to take silver from anywhere on the map instead (they open your doors; other goods are left alone). The silver buys goodwill back as a vanilla gift would (40 silver = 1 while goodwill is at or below 0, less the friendlier XCC is). The squad takes no more than it needs to reach 80 (75 is an alliance). If they find no silver, the vanilla drift applies.</WBE_DriftPlunder_Desc>
   <WBE_DriftPlunderMinWealth>Minimum colony wealth for XCC looters: {0}</WBE_DriftPlunderMinWealth>
   <WBE_DriftPlunderMinWealth_Desc>Checked on your richest home map. Below it, the vanilla drift applies. The default 14000 is where vanilla wealth starts adding raid points.</WBE_DriftPlunderMinWealth_Desc>
 
@@ -19,6 +19,6 @@
   <WBE_CaravanRaidPlunder>The {FACTION_name} strike team is looting before it leaves.</WBE_CaravanRaidPlunder>
   <WBE_CaravanRaidPlunderKidnap>The {FACTION_name} strike team is looting and carrying off the caravan's downed people before it leaves.</WBE_CaravanRaidPlunderKidnap>
   <WBE_AidSalvageMessage>The {FACTION_name} squad is taking weapons and apparel left on the battlefield as its spoils before it leaves.</WBE_AidSalvageMessage>
-  <WBE_DriftPlunderArrived>{FACTION_name} has sent a squad to "keep relations good". It is about to loot your colony.</WBE_DriftPlunderArrived>
-  <WBE_AidPlunderMessage>The {FACTION_name} squad left unscratched and feels you wasted its time. It is looting on the way out as compensation.</WBE_AidPlunderMessage>
+  <WBE_DriftPlunderArrived>{FACTION_name} has sent a squad to "keep relations good". It is about to take your silver.</WBE_DriftPlunderArrived>
+  <WBE_AidPlunderMessage>The {FACTION_name} squad left unscratched and feels you wasted its time. It is taking silver on the way out as compensation.</WBE_AidPlunderMessage>
 </LanguageData>

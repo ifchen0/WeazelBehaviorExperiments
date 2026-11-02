@@ -6,12 +6,12 @@
   <WBE_StrikeTeamKidnap_Desc>搜刮物資前，突擊隊會先把倒地的商隊成員帶走（XCC做奴隸買賣）。已被你救起、俘虜或安置在床上的人不受影響。</WBE_StrikeTeamKidnap_Desc>
   <WBE_AidSalvage>參戰過的XCC支援隊離開時會拿走戰場裝備</WBE_AidSalvage>
   <WBE_AidSalvage_Desc>用功績或通訊台召來的XCC支援隊，若受過傷，離開時會拿走倉庫以外地上的武器和衣物作為戰利品，不會動你的倉庫。</WBE_AidSalvage_Desc>
-  <WBE_AidPlunder>毫髮無傷的XCC支援隊離開時會搜刮</WBE_AidPlunder>
-  <WBE_AidPlunder_Desc>用功績或通訊台召來的XCC支援隊，若離開時沒有受到任何傷害，會拿走一定範圍內最值錢的物品（包括你倉庫裡的）。他們熟悉你的基地，會自己開門進去拿。</WBE_AidPlunder_Desc>
+  <WBE_AidPlunder>毫髮無傷的XCC支援隊離開時會拿走銀幣</WBE_AidPlunder>
+  <WBE_AidPlunder_Desc>用功績或通訊台召來的XCC支援隊，若離開時沒有受到任何傷害，會拿走全地圖的銀幣（包括你倉庫裡的），不會動其他物品。他們熟悉你的基地，會自己開門進去拿。</WBE_AidPlunder_Desc>
   <WBE_BestowingPenalty>XCC授勳儀式失敗時減少的好感度：{0}</WBE_BestowingPenalty>
   <WBE_BestowingPenalty_Desc>不論原因為何，XCC都會把授勳儀式失敗算在你頭上。扣減後的好感度不會低到讓XCC轉為敵對。設為0即關閉。</WBE_BestowingPenalty_Desc>
-  <WBE_DriftPlunder>XCC以搜刮代替好感度自然下滑</WBE_DriftPlunder>
-  <WBE_DriftPlunder_Desc>原版每50天會讓XCC的好感度往長期好感度下滑10點。若XCC與你中立、好感度低於0，且你的殖民地夠富裕，XCC會改派一支小隊來搜刮（會自己開門）。帶走的物資照原版送禮算法換回好感度（好感度0以下時40銀=1點，越友好換得越少）。整隊最多只拿到讓好感度回到80的量（75以上即為同盟）；什麼都沒拿到就照原版下滑。</WBE_DriftPlunder_Desc>
+  <WBE_DriftPlunder>XCC以拿走銀幣代替好感度自然下滑</WBE_DriftPlunder>
+  <WBE_DriftPlunder_Desc>原版每50天會讓XCC的好感度往長期好感度下滑10點。若XCC與你中立、好感度低於0，且你的殖民地夠富裕，XCC會改派一支小隊來拿走全地圖的銀幣（會自己開門，不會動其他物品）。帶走的銀幣照原版送禮算法換回好感度（好感度0以下時40銀=1點，越友好換得越少）。整隊最多只拿到讓好感度回到80的量（75以上即為同盟）；找不到銀幣就照原版下滑。</WBE_DriftPlunder_Desc>
   <WBE_DriftPlunderMinWealth>XCC來搜刮的最低殖民地財富：{0}</WBE_DriftPlunderMinWealth>
   <WBE_DriftPlunderMinWealth_Desc>以財富最高的玩家基地計算，低於這個值時照原版好感度下滑。預設14000是原版財富開始增加襲擊點數的門檻。</WBE_DriftPlunderMinWealth_Desc>
 
@@ -19,6 +19,6 @@
   <WBE_CaravanRaidPlunder>{FACTION_name}突擊隊離開前，正在搜刮物資。</WBE_CaravanRaidPlunder>
   <WBE_CaravanRaidPlunderKidnap>{FACTION_name}突擊隊離開前，正在搜刮物資並帶走倒地的商隊成員。</WBE_CaravanRaidPlunderKidnap>
   <WBE_AidSalvageMessage>{FACTION_name}支援隊離開前，正在拿走戰場上的武器和衣物作為戰利品。</WBE_AidSalvageMessage>
-  <WBE_DriftPlunderArrived>{FACTION_name}派了一支小隊來「維持良好關係」，正要搜刮你的物資。</WBE_DriftPlunderArrived>
-  <WBE_AidPlunderMessage>{FACTION_name}支援隊毫髮無傷，認為你在浪費他們的時間，離開前正在搜刮物資作為補償。</WBE_AidPlunderMessage>
+  <WBE_DriftPlunderArrived>{FACTION_name}派了一支小隊來「維持良好關係」，正要拿走你的銀幣。</WBE_DriftPlunderArrived>
+  <WBE_AidPlunderMessage>{FACTION_name}支援隊毫髮無傷，認為你在浪費他們的時間，離開前正在拿走銀幣作為補償。</WBE_AidPlunderMessage>
 </LanguageData>

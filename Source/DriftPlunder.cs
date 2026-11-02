@@ -80,6 +80,7 @@ namespace WeazelBehaviorExperiments
                 {
                     travelTo = DropCellFinder.TradeDropSpot(map),
                     budget = BudgetToCeiling(xcc.BaseGoodwillWith(player)),
+                    silverOnly = true,
                 };
                 LordMaker.MakeNewLord(xcc, job, map, team);
                 Messages.Message("WBE_DriftPlunderArrived".Translate(xcc.Named("FACTION")), new LookTargets(team), MessageTypeDefOf.NegativeEvent);
