@@ -13,6 +13,7 @@ namespace WeazelBehaviorExperiments
         // Chance that a caravan of an XCC enemy draws a strike team. 0 turns the behaviour off.
         public float caravanRaidChance = 0.3f;
         public bool strikeTeamKidnap = true;
+        public bool captiveSlaves = true;
         public bool aidPlunder = true;
         public bool aidSalvage = true;
         // Goodwill lost when an XCC bestowing ceremony expires. 0 turns it off.
@@ -25,6 +26,7 @@ namespace WeazelBehaviorExperiments
         {
             Scribe_Values.Look(ref caravanRaidChance, "caravanRaidChance", 0.3f);
             Scribe_Values.Look(ref strikeTeamKidnap, "strikeTeamKidnap", true);
+            Scribe_Values.Look(ref captiveSlaves, "captiveSlaves", true);
             Scribe_Values.Look(ref aidPlunder, "aidPlunder", true);
             Scribe_Values.Look(ref aidSalvage, "aidSalvage", true);
             Scribe_Values.Look(ref bestowingPenalty, "bestowingPenalty", 15);
@@ -52,6 +54,7 @@ namespace WeazelBehaviorExperiments
             listing.Label("WBE_CaravanRaidChance".Translate(Settings.caravanRaidChance.ToStringPercent()), tooltip: "WBE_CaravanRaidChance_Desc".Translate());
             Settings.caravanRaidChance = Mathf.Round(listing.Slider(Settings.caravanRaidChance, 0f, 1f) * 20f) / 20f;
             listing.CheckboxLabeled("WBE_StrikeTeamKidnap".Translate(), ref Settings.strikeTeamKidnap, "WBE_StrikeTeamKidnap_Desc".Translate());
+            listing.CheckboxLabeled("WBE_CaptiveSlaves".Translate(), ref Settings.captiveSlaves, "WBE_CaptiveSlaves_Desc".Translate());
             listing.Gap();
             listing.CheckboxLabeled("WBE_AidPlunder".Translate(), ref Settings.aidPlunder, "WBE_AidPlunder_Desc".Translate());
             listing.CheckboxLabeled("WBE_AidSalvage".Translate(), ref Settings.aidSalvage, "WBE_AidSalvage_Desc".Translate());

@@ -78,6 +78,66 @@ namespace WeazelBehaviorExperiments
                 Messages.Message("Not sent: " + failReason + ".", MessageTypeDefOf.RejectInput, false);
         }
 
+        // Puts the clicked pawn on XCC's kidnapped list as a real kidnapping would, minus the letter
+        // (vanilla only sends it when there is a kidnapper).
+        [DebugAction(Category, "XCC kidnaps this pawn", actionType = DebugActionType.ToolMapForPawns, allowedGameStates = AllowedGameStates.PlayingOnMap)]
+        private static void XccKidnaps(Pawn p)
+        {
+            Faction xcc = XccUtility.Xcc;
+            // Same victims vanilla kidnappers accept (KidnapAIUtility): no subhumans such as ghouls.
+            if (xcc == null || !p.RaceProps.Humanlike || p.IsSubhuman || p.Faction == xcc || xcc.kidnapped.KidnappedPawnsListForReading.Contains(p))
+            {
+                Messages.Message("Needs a humanlike, non-subhuman pawn that is not XCC's and not already kidnapped.", MessageTypeDefOf.RejectInput, false);
+                return;
+            }
+            xcc.kidnapped.Kidnap(p, null);
+            Messages.Message($"{p.LabelShort} kidnapped by XCC ({xcc.kidnapped.KidnappedPawnsListForReading.Count} captives).", MessageTypeDefOf.NeutralEvent, false);
+        }
+
+        // Skips the wait after a comms request: an XCC slave merchant caravan walks in right away.
+        [DebugAction(Category, "XCC slave merchant caravan now", allowedGameStates = AllowedGameStates.PlayingOnMap)]
+        private static void SlaveCaravanNow()
+        {
+            Faction xcc = XccUtility.Xcc;
+            TraderKindDef kind = DefDatabase<TraderKindDef>.GetNamedSilentFail("Caravan_Weazel_SlaveMerchant");
+            if (xcc == null || kind == null || xcc.HostileTo(Faction.OfPlayer))
+            {
+                Messages.Message("XCC must exist and not be hostile (and Ideology must be active).", MessageTypeDefOf.RejectInput, false);
+                return;
+            }
+            var parms = new IncidentParms { target = Find.CurrentMap, faction = xcc, traderKind = kind };
+            if (!IncidentDefOf.TraderCaravanArrival.Worker.TryExecute(parms))
+                Messages.Message("Could not send the caravan.", MessageTypeDefOf.RejectInput, false);
+        }
+
+        // An XCC slave merchant ship in orbit, as vanilla's orbital trader arrival makes it (no letter).
+        [DebugAction(Category, "XCC slave trade ship now", allowedGameStates = AllowedGameStates.PlayingOnMap)]
+        private static void SlaveShipNow()
+        {
+            Faction xcc = XccUtility.Xcc;
+            TraderKindDef kind = DefDatabase<TraderKindDef>.GetNamedSilentFail("Orbital_Weazel_SlaveMerchant");
+            if (xcc == null || kind == null)
+            {
+                Messages.Message("XCC must exist (and Ideology must be active).", MessageTypeDefOf.RejectInput, false);
+                return;
+            }
+            var ship = new TradeShip(kind, xcc);
+            Find.CurrentMap.passingShipManager.AddShip(ship);
+            ship.GenerateThings();
+            Messages.Message($"{ship.TraderName} is in orbit; trade through a comms console.", MessageTypeDefOf.NeutralEvent, false);
+        }
+
+        // Skips the ~30-day roll: every current XCC captive is put up for sale. Request an XCC slave
+        // merchant afterwards to see them in its stock.
+        [DebugAction(Category, "Put XCC captives up for sale now", allowedGameStates = AllowedGameStates.Playing)]
+        private static void CaptivesForSaleNow()
+        {
+            Faction xcc = XccUtility.Xcc;
+            if (xcc == null || GameComponent_XccSlaves.Instance == null) return;
+            GameComponent_XccSlaves.Instance.MarkAllForSale(xcc);
+            Messages.Message("XCC captives up for sale: " + xcc.kidnapped.KidnappedPawnsListForReading.Count + ".", MessageTypeDefOf.NeutralEvent, false);
+        }
+
         [DebugAction(Category, "XCC lords plunder now", allowedGameStates = AllowedGameStates.PlayingOnMap)]
         private static void PlunderNow()
         {

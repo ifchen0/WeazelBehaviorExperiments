@@ -147,7 +147,7 @@ namespace WeazelBehaviorExperiments
     {
         public const float SearchRadius = 45f;
         // Same floor as vanilla stealing: smaller loads are not worth the trip.
-        private const float MinLoadValue = 320f;
+        public const float MinLoadValue = 320f;
 
         protected override Job TryGiveJob(Pawn pawn)
         {

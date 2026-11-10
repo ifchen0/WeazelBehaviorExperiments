@@ -5,6 +5,9 @@ These scenarios are my own take on how the Weazels would act, based on my impres
 [h2]Protection racket[/h2]
 While your colony is neutral with XCC, a trade caravan from a faction hostile to XCC may draw an XCC strike team onto your map (30% per caravan by default). The team hunts the caravan, and once the caravan is gone, defeated or left, it carries off the caravan's downed people and collects its due before leaving. XCC treats a neutral colony as its own turf, and deals in slaves.
 
+[h2]Captives, not recruits[/h2]
+In vanilla, kidnapped people join their kidnappers after about 30 days. XCC keeps the people it carries off captive instead, so your kidnapped colonists can still be ransomed back. After about 30 days a captive is also put up for sale, and an XCC slave merchant may bring them along (at most 2 per merchant; Ideology needed), stripped of weapons, everything they carry and any apparel worth 320 silver or more. A colonist you buy back rejoins as a colonist; anyone else you buy is your slave, and goes home to the faction XCC took them from if emancipated. Colonists nobody buys go back into captivity; anyone else is gone for good.
+
 [h2]Wasted time[/h2]
 An XCC squad called in with favor, or requested from an allied XCC on the comms console, that leaves without taking any damage collects compensation in silver on the way out, from anywhere on your map. Other goods are left alone. They feel you wasted their time. A squad that did fight takes the weapons and apparel left lying outside your storage instead, as spoils of the fight.
 
@@ -19,7 +22,7 @@ Left alone, a neutral XCC drifts towards war: every 50 days vanilla lowers its g
 [*]A strike team member carries off the most valuable load within a wide radius, a defeated caravan's goods and your stockpiles alike, or leaves empty-handed. Squads collecting from you take one stack of silver each. Strike teams leave closed rooms alone; a squad you called in knows its way around and opens your doors.
 [*]A message in the top-left corner explains each event when it starts (no letters).
 [*]Attacking the team turns XCC hostile, as with any neutral visitor.
-[*]The caravan chance, the kidnapping, the wasted-time behaviour, the battlefield spoils, the ceremony goodwill loss and the relations squad (with its wealth threshold) can be changed in the mod settings.
+[*]The caravan chance, the kidnapping, keeping captives as slaves, the wasted-time behaviour, the battlefield spoils, the ceremony goodwill loss and the relations squad (with its wealth threshold) can be changed in the mod settings.
 [*]Safe to add to an existing save. Remove it only when no XCC strike team or collecting squad is on the map.
 [/list]
 [hr][/hr]

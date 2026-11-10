@@ -4,6 +4,8 @@
   <WBE_CaravanRaidChance_Desc>While your colony is neutral with XCC, each trade caravan from a faction hostile to XCC has this chance of drawing an XCC strike team. 0% turns it off.</WBE_CaravanRaidChance_Desc>
   <WBE_StrikeTeamKidnap>Strike teams carry off downed caravan members</WBE_StrikeTeamKidnap>
   <WBE_StrikeTeamKidnap_Desc>Before looting, the strike team takes the caravan's downed people with it (XCC deals in slaves). Anyone you have already taken in, captured or put in a bed is left alone.</WBE_StrikeTeamKidnap_Desc>
+  <WBE_CaptiveSlaves>XCC keeps the people it carries off as slaves</WBE_CaptiveSlaves>
+  <WBE_CaptiveSlaves_Desc>In vanilla, kidnapped people join their kidnappers after about 30 days. XCC keeps them captive instead: your colonists can still be ransomed back. After about 30 days a captive is also put up for sale, and an XCC slave merchant may bring them along (at most 2 per merchant; Ideology needed), stripped of weapons, everything they carry and any apparel worth 320 silver or more. A colonist you buy back rejoins as a colonist; anyone else you buy is your slave, and goes home to the faction XCC took them from if emancipated. Colonists nobody buys go back into captivity; anyone else is gone for good. Without Ideology, captives simply stay captive.</WBE_CaptiveSlaves_Desc>
   <WBE_AidSalvage>XCC squads that fought take battlefield gear when leaving</WBE_AidSalvage>
   <WBE_AidSalvage_Desc>An XCC squad called in with favor or requested on the comms console that took damage takes weapons and apparel lying outside your storage on the way out, as spoils of the fight. Stockpiles are left alone.</WBE_AidSalvage_Desc>
   <WBE_AidPlunder>Unharmed XCC squads take silver when leaving</WBE_AidPlunder>
@@ -18,6 +20,8 @@
   <WBE_CaravanRaidArrived>An {XCC_name} strike team has followed the {CARAVAN_name} caravan here and is moving in to attack it.</WBE_CaravanRaidArrived>
   <WBE_CaravanRaidPlunder>The {FACTION_name} strike team is looting before it leaves.</WBE_CaravanRaidPlunder>
   <WBE_CaravanRaidPlunderKidnap>The {FACTION_name} strike team is looting and carrying off the caravan's downed people before it leaves.</WBE_CaravanRaidPlunderKidnap>
+  <WBE_CaptiveForSale>{FACTION_name} has put {PAWN_labelShort} up for sale as a slave. An XCC slave merchant may bring {PAWN_objective} along; a ransom demand can still come first.</WBE_CaptiveForSale>
+  <WBE_CaptiveOnSale>{PAWN_labelShort} is among the slaves a {FACTION_name} slave merchant is selling.</WBE_CaptiveOnSale>
   <WBE_AidSalvageMessage>The {FACTION_name} squad is taking weapons and apparel left on the battlefield as its spoils before it leaves.</WBE_AidSalvageMessage>
   <WBE_DriftPlunderArrived>{FACTION_name} has sent a squad to "keep relations good". It is about to take your silver.</WBE_DriftPlunderArrived>
   <WBE_AidPlunderMessage>The {FACTION_name} squad left unscratched and feels you wasted its time. It is taking silver on the way out as compensation.</WBE_AidPlunderMessage>

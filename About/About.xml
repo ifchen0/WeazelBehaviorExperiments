@@ -14,6 +14,9 @@ These scenarios are my own take on how the Weazels would act, based on my impres
 Protection racket
 While your colony is neutral with XCC, a trade caravan from a faction hostile to XCC may draw an XCC strike team onto your map. The team hunts the caravan, and once the caravan is gone (defeated or left) it carries off the caravan's downed people and grabs valuables lying nearby before leaving. XCC treats a neutral colony as its own turf, and deals in slaves.
 
+Captives, not recruits
+In vanilla, kidnapped people join their kidnappers after about 30 days. XCC keeps the people it carries off captive instead, so your kidnapped colonists can still be ransomed back. After about 30 days a captive is also put up for sale, and an XCC slave merchant may bring them along (at most 2 per merchant; Ideology needed), stripped of weapons, everything they carry and any apparel worth 320 silver or more. A colonist you buy back rejoins as a colonist; anyone else you buy is your slave, and goes home to the faction XCC took them from if emancipated. Colonists nobody buys go back into captivity; anyone else is gone for good.
+
 Wasted time
 An XCC squad called in with favor, or requested from an allied XCC on the comms console, that leaves without taking any damage takes silver from anywhere on your map before leaving, leaving other goods alone. They feel you wasted their time. A squad that did fight takes the weapons and apparel left lying outside your storage instead, as spoils of the fight.
 

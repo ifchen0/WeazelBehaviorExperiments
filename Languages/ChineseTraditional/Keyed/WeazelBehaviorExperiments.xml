@@ -4,6 +4,8 @@
   <WBE_CaravanRaidChance_Desc>殖民地與XCC保持中立時，每支與XCC敵對陣營的商隊，都有這個機率引來XCC突擊隊。設為0%即關閉。</WBE_CaravanRaidChance_Desc>
   <WBE_StrikeTeamKidnap>突擊隊會帶走倒地的商隊成員</WBE_StrikeTeamKidnap>
   <WBE_StrikeTeamKidnap_Desc>搜刮物資前，突擊隊會先把倒地的商隊成員帶走（XCC做奴隸買賣）。已被你救起、俘虜或安置在床上的人不受影響。</WBE_StrikeTeamKidnap_Desc>
+  <WBE_CaptiveSlaves>XCC把擄走的人當作奴隸</WBE_CaptiveSlaves>
+  <WBE_CaptiveSlaves_Desc>原版中，被綁架的人約30天後會加入綁架者的陣營。XCC則一直把他們關著：你的殖民者仍可付贖金換回。約30天後，被擄者還會被列為奴隸商品，可能出現在XCC奴隸商隊的貨品中（每支商隊最多2人，需要Ideology），武器、隨身物品和每件價值320銀以上的衣物會被沒收。買回的殖民者會直接歸隊；買下的其他人會成為你的奴隸，解放後會回到被XCC擄走前的陣營。沒人買下的殖民者會回到被擄狀態，其他人則就此消失。沒有Ideology時，被擄者只會一直被關著。</WBE_CaptiveSlaves_Desc>
   <WBE_AidSalvage>參戰過的XCC支援隊離開時會拿走戰場裝備</WBE_AidSalvage>
   <WBE_AidSalvage_Desc>用功績或通訊台召來的XCC支援隊，若受過傷，離開時會拿走倉庫以外地上的武器和衣物作為戰利品，不會動你的倉庫。</WBE_AidSalvage_Desc>
   <WBE_AidPlunder>毫髮無傷的XCC支援隊離開時會拿走銀幣</WBE_AidPlunder>
@@ -18,6 +20,8 @@
   <WBE_CaravanRaidArrived>一支{XCC_name}突擊隊尾隨{CARAVAN_name}的商隊而來，準備襲擊商隊。</WBE_CaravanRaidArrived>
   <WBE_CaravanRaidPlunder>{FACTION_name}突擊隊離開前，正在搜刮物資。</WBE_CaravanRaidPlunder>
   <WBE_CaravanRaidPlunderKidnap>{FACTION_name}突擊隊離開前，正在搜刮物資並帶走倒地的商隊成員。</WBE_CaravanRaidPlunderKidnap>
+  <WBE_CaptiveForSale>{FACTION_name}已把{PAWN_labelShort}列為奴隸商品，之後可能出現在XCC奴隸商隊的貨品中；在那之前仍可能收到贖金要求。</WBE_CaptiveForSale>
+  <WBE_CaptiveOnSale>{PAWN_labelShort}在{FACTION_name}奴隸商隊販賣的奴隸之中。</WBE_CaptiveOnSale>
   <WBE_AidSalvageMessage>{FACTION_name}支援隊離開前，正在拿走戰場上的武器和衣物作為戰利品。</WBE_AidSalvageMessage>
   <WBE_DriftPlunderArrived>{FACTION_name}派了一支小隊來「維持良好關係」，正要拿走你的銀幣。</WBE_DriftPlunderArrived>
   <WBE_AidPlunderMessage>{FACTION_name}支援隊毫髮無傷，認為你在浪費他們的時間，離開前正在拿走銀幣作為補償。</WBE_AidPlunderMessage>
