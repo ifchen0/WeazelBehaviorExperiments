@@ -16,6 +16,8 @@
   <WBE_DriftPlunder_Desc>Every 50 days vanilla drifts XCC's goodwill 10 towards its natural level. If XCC is neutral with you, goodwill is below 0 and your colony is rich enough, XCC sends a squad to take silver from anywhere on the map instead (they open your doors; other goods are left alone). The silver buys goodwill back as a vanilla gift would (40 silver = 1 while goodwill is at or below 0, less the friendlier XCC is). The squad takes no more than it needs to reach 80 (75 is an alliance). If they find no silver, the vanilla drift applies.</WBE_DriftPlunder_Desc>
   <WBE_DriftPlunderMinWealth>Minimum colony wealth for XCC looters: {0}</WBE_DriftPlunderMinWealth>
   <WBE_DriftPlunderMinWealth_Desc>Checked on your richest home map. Below it, the vanilla drift applies. The default 14000 is where vanilla wealth starts adding raid points.</WBE_DriftPlunderMinWealth_Desc>
+  <WBE_NoXccEmpireQuests>XCC does not offer Empire-style quests</WBE_NoXccEmpireQuests>
+  <WBE_NoXccEmpireQuests_Desc>Vanilla lets any faction with royal titles offer the Empire's quests, but fills them with human nobles, human mercenaries and Empire shuttles. XCC no longer offers hosting quests (guests, prisoners, animals), building a monument, lending colonists, or threat-for-reward quests that can send mercenary helpers. It still offers the two threat-for-reward quests without helpers (a condition or a nearby site), so royal favor stays available.</WBE_NoXccEmpireQuests_Desc>
 
   <WBE_CaravanRaidArrived>An {XCC_name} strike team has followed the {CARAVAN_name} caravan here and is moving in to attack it.</WBE_CaravanRaidArrived>
   <WBE_CaravanRaidPlunder>The {FACTION_name} strike team is looting before it leaves.</WBE_CaravanRaidPlunder>

@@ -21,6 +21,7 @@ namespace WeazelBehaviorExperiments
         public bool driftPlunder = true;
         // Colony wealth below this is not worth a visit. Default: vanilla's 14000, where wealth starts adding raid points.
         public int driftPlunderMinWealth = 14000;
+        public bool noXccEmpireQuests = true;
 
         public override void ExposeData()
         {
@@ -32,6 +33,7 @@ namespace WeazelBehaviorExperiments
             Scribe_Values.Look(ref bestowingPenalty, "bestowingPenalty", 15);
             Scribe_Values.Look(ref driftPlunder, "driftPlunder", true);
             Scribe_Values.Look(ref driftPlunderMinWealth, "driftPlunderMinWealth", 14000);
+            Scribe_Values.Look(ref noXccEmpireQuests, "noXccEmpireQuests", true);
         }
     }
 
@@ -65,6 +67,8 @@ namespace WeazelBehaviorExperiments
             listing.CheckboxLabeled("WBE_DriftPlunder".Translate(), ref Settings.driftPlunder, "WBE_DriftPlunder_Desc".Translate());
             listing.Label("WBE_DriftPlunderMinWealth".Translate(((float)Settings.driftPlunderMinWealth).ToStringMoney()), tooltip: "WBE_DriftPlunderMinWealth_Desc".Translate());
             Settings.driftPlunderMinWealth = Mathf.RoundToInt(listing.Slider(Settings.driftPlunderMinWealth, 0f, 200000f) / 1000f) * 1000;
+            listing.Gap();
+            listing.CheckboxLabeled("WBE_NoXccEmpireQuests".Translate(), ref Settings.noXccEmpireQuests, "WBE_NoXccEmpireQuests_Desc".Translate());
             listing.End();
         }
     }

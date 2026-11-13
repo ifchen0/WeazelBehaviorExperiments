@@ -17,12 +17,15 @@ XCC blames you for any failed bestowing ceremony, whether you let it expire, a r
 [h2]Keeping relations good[/h2]
 Left alone, a neutral XCC drifts towards war: every 50 days vanilla lowers its goodwill by 10. If XCC's goodwill is below 0 and your colony is worth at least 14,000 silver, XCC sends a 10-member squad to "keep relations good" instead. They walk in to where caravans unload, take silver from anywhere on the map and leave. The silver buys goodwill back as a vanilla gift would (40 silver per point at 0 or below, less above that), and the squad takes no more than it needs to bring XCC up to 80, just past an alliance at 75. If they find no silver, the usual drop applies.
 
+[h2]No Empire errands[/h2]
+Vanilla lets any faction with royal titles offer the Empire's quests, so XCC could ask you to host its "nobles", guard prisoners or animals, build a monument or lend colonists, and those quests came with human nobles, human mercenaries and Empire shuttles. XCC no longer offers them, nor the threat-for-reward quests that can send mercenary helpers. The two threat-for-reward quests without helpers (a condition or a nearby site) remain, so royal favor with XCC can still be earned from quests.
+
 [h2]Notes[/h2][list]
 [*]Strike teams do not carry off caravan members you have captured or put in a bed.
 [*]A strike team member carries off the most valuable load within a wide radius, a defeated caravan's goods and your stockpiles alike, or leaves empty-handed. Squads collecting from you take one stack of silver each. Strike teams leave closed rooms alone; a squad you called in knows its way around and opens your doors.
 [*]A message in the top-left corner explains each event when it starts (no letters).
 [*]Attacking the team turns XCC hostile, as with any neutral visitor.
-[*]The caravan chance, the kidnapping, keeping captives as slaves, the wasted-time behaviour, the battlefield spoils, the ceremony goodwill loss and the relations squad (with its wealth threshold) can be changed in the mod settings.
+[*]The caravan chance, the kidnapping, keeping captives as slaves, the wasted-time behaviour, the battlefield spoils, the ceremony goodwill loss, the relations squad (with its wealth threshold) and the Empire-style quests can be changed in the mod settings.
 [*]Safe to add to an existing save. Remove it only when no XCC strike team or collecting squad is on the map.
 [/list]
 [hr][/hr]
