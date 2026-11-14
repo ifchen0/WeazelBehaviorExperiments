@@ -20,11 +20,8 @@
   <WBE_NoXccEmpireQuests_Desc>原版讓任何有頭銜的派系都能發布帝國的任務，但任務裡的貴族、傭兵都是人類，還坐帝國的穿梭機。XCC不再發布招待任務（客人、囚犯、動物）、建造紀念碑、借用殖民者，以及可能派傭兵協助的「撐過威脅換獎勵」任務。不帶傭兵的兩種「撐過威脅換獎勵」任務（環境異象、附近據點）照常發布，仍可取得功績。</WBE_NoXccEmpireQuests_Desc>
 
   <WBE_CaravanRaidArrived>一支{XCC_name}突擊隊尾隨{CARAVAN_name}的商隊而來，準備襲擊商隊。</WBE_CaravanRaidArrived>
-  <WBE_CaravanRaidPlunder>{FACTION_name}突擊隊離開前，正在搜刮物資。</WBE_CaravanRaidPlunder>
-  <WBE_CaravanRaidPlunderKidnap>{FACTION_name}突擊隊離開前，正在搜刮物資並帶走倒地的商隊成員。</WBE_CaravanRaidPlunderKidnap>
   <WBE_CaptiveForSale>{FACTION_name}已把{PAWN_labelShort}列為奴隸商品，之後可能出現在XCC奴隸商隊的貨品中；在那之前仍可能收到贖金要求。</WBE_CaptiveForSale>
   <WBE_CaptiveOnSale>{PAWN_labelShort}在{FACTION_name}奴隸商隊販賣的奴隸之中。</WBE_CaptiveOnSale>
-  <WBE_AidSalvageMessage>{FACTION_name}支援隊離開前，正在拿走戰場上的武器和衣物作為戰利品。</WBE_AidSalvageMessage>
   <WBE_DriftPlunderArrived>{FACTION_name}派了一支小隊來「維持良好關係」，正要拿走你的銀幣。</WBE_DriftPlunderArrived>
   <WBE_AidPlunderMessage>{FACTION_name}支援隊毫髮無傷，認為你在浪費他們的時間，離開前正在拿走銀幣作為補償。</WBE_AidPlunderMessage>
 </LanguageData>

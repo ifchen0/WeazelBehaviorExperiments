@@ -95,9 +95,8 @@ namespace WeazelBehaviorExperiments
             var plunderJob = new LordJob_WeazelPlunder(throughDoors: false);
             if (WeazelBehaviorExperimentsMod.Settings.strikeTeamKidnap && raidLord.LordJob is LordJob_WeazelCaravanRaid raid)
                 plunderJob.kidnapTargets = raid.CaravanMembers.ToList();
-            Pawn anyMember = raidLord.ownedPawns.FirstOrDefault();
-            bool kidnapping = anyMember != null && plunderJob.kidnapTargets.Any(v => plunderJob.CanKidnap(anyMember, v));
-            PlunderUtility.StartPlunder(raidLord, kidnapping ? "WBE_CaravanRaidPlunderKidnap" : "WBE_CaravanRaidPlunder", plunderJob);
+            // No message: the caravan fight already drew the player's eye, and the loot is not the player's.
+            PlunderUtility.StartPlunder(raidLord, null, plunderJob);
         }
 
         public static bool TrySpawnStrikeTeam(Lord caravanLord)

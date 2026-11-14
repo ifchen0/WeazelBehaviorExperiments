@@ -18,7 +18,7 @@ Captives, not recruits
 In vanilla, kidnapped people join their kidnappers after about 30 days. XCC keeps the people it carries off captive instead, so your kidnapped colonists can still be ransomed back. After about 30 days a captive is also put up for sale, and an XCC slave merchant may bring them along (at most 2 per merchant; Ideology needed), stripped of weapons, everything they carry and any apparel worth 320 silver or more. A colonist you buy back rejoins as a colonist; anyone else you buy is your slave, and goes home to the faction XCC took them from if emancipated. Colonists nobody buys go back into captivity; anyone else is gone for good.
 
 Wasted time
-An XCC squad called in with favor, or requested from an allied XCC on the comms console, that leaves without taking any damage takes silver from anywhere on your map before leaving, leaving other goods alone. They feel you wasted their time. A squad that did fight takes the weapons and apparel left lying outside your storage instead, as spoils of the fight.
+An XCC squad called in with favor, or requested from an allied XCC on the comms console, that leaves without taking any damage takes silver from anywhere on your map before leaving, leaving other goods alone. They feel you wasted their time. A squad that did fight takes the weapons and apparel left lying outside your storage instead, as spoils of the fight. A squad that breaks and flees just runs.
 
 Failed ceremony
 XCC blames you for any failed bestowing ceremony, whether you let it expire, a raid broke it up or someone died, and takes goodwill for it (15 by default). It never drops goodwill low enough to turn XCC hostile, since a war would break out with their officer still on your map.
@@ -31,7 +31,7 @@ Vanilla lets any faction with royal titles offer the Empire's quests, so XCC cou
 
 Notes
 - A strike team member carries off the most valuable load within a wide radius, your stockpiles included, or leaves empty-handed. Squads collecting from you take one stack of silver each. Strike teams leave closed rooms alone; a squad you called in knows its way around and opens your doors.
-- A message in the top-left corner explains each event when it starts (no letters).
+- A message in the top-left corner appears when something touches you: a strike team arriving, a squad taking your silver, your people put up for sale (no letters). Looting a beaten caravan and collecting battlefield gear happen without one.
 - Attacking the team turns XCC hostile, as with any neutral visitor.
 - Safe to add to an existing save. Remove it only when no XCC strike team or collecting squad is on the map.</description>
   <modDependencies>

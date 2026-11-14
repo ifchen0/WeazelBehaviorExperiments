@@ -83,15 +83,23 @@ namespace WeazelBehaviorExperiments
                 if (lord.CurLordToil is LordToil_HuntEnemies) continue;
                 bool undamaged = !damagedAidLords.Contains(id);
                 Forget(id);
+                // Only a squad whose time ran out stays to collect: one that broke and fled, or left early
+                // (dangerous temperature, trapped), keeps leaving as vanilla intends.
+                if (!HuntTimeRanOut(lord)) continue;
                 if (!XccUtility.IsXcc(lord.faction) || lord.faction.HostileTo(Faction.OfPlayer)) continue;
                 ExperimentSettings settings = WeazelBehaviorExperimentsMod.Settings;
                 if (undamaged && settings.aidPlunder)
                     PlunderUtility.StartPlunder(lord, "WBE_AidPlunderMessage", new LordJob_WeazelPlunder(throughDoors: true) { silverOnly = true });
                 // A squad that fought takes the spoils of the fight instead: gear left lying outside storage.
                 else if (!undamaged && settings.aidSalvage)
-                    PlunderUtility.StartPlunder(lord, "WBE_AidSalvageMessage", new LordJob_WeazelPlunder(throughDoors: true) { battlefieldOnly = true });
+                    PlunderUtility.StartPlunder(lord, null, new LordJob_WeazelPlunder(throughDoors: true) { battlefieldOnly = true });
             }
         }
+
+        // The vanilla 25000-tick leave trigger keeps its count after firing, so it shows which exit was taken.
+        private static bool HuntTimeRanOut(Lord lord) =>
+            lord.Graph.transitions.Any(t => t.sources.Any(s => s is LordToil_HuntEnemies)
+                && t.triggers.OfType<Trigger_TicksPassed>().Any(tr => tr.TicksLeft == 0));
 
         private void Forget(int id)
         {

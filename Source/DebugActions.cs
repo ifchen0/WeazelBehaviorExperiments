@@ -66,7 +66,11 @@ namespace WeazelBehaviorExperiments
             {
                 Transition timeUp = lord.Graph.transitions.FirstOrDefault(t =>
                     t.sources.Contains(lord.CurLordToil) && t.triggers.Any(tr => tr is Trigger_TicksPassed));
-                timeUp?.Execute(lord);
+                if (timeUp == null) continue;
+                // Run the clock out too, as the map component reads it to tell a timed exit from a flight.
+                foreach (Trigger_TicksPassed tr in timeUp.triggers.OfType<Trigger_TicksPassed>())
+                    ((TriggerData_TicksPassed)tr.data).ticksPassed = int.MaxValue / 2;
+                timeUp.Execute(lord);
             }
         }
 

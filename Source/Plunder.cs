@@ -243,7 +243,8 @@ namespace WeazelBehaviorExperiments
                 map.lordManager.RemoveLord(oldLord);
 
             LordMaker.MakeNewLord(faction, plunderJob, map, pawns);
-            Messages.Message(messageKey.Translate(faction.Named("FACTION")), new LookTargets(pawns), MessageTypeDefOf.NegativeEvent);
+            if (messageKey != null)
+                Messages.Message(messageKey.Translate(faction.Named("FACTION")), new LookTargets(pawns), MessageTypeDefOf.NegativeEvent);
         }
     }
 }
