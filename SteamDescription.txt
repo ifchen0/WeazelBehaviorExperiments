@@ -26,6 +26,7 @@ Vanilla lets any faction with royal titles offer the Empire's quests, so XCC cou
 [*]A message in the top-left corner appears when something touches you: a strike team arriving, a squad taking your silver, your people put up for sale (no letters). Looting a beaten caravan and collecting battlefield gear happen without one.
 [*]Attacking the team turns XCC hostile, as with any neutral visitor.
 [*]The caravan chance, the kidnapping, keeping captives as slaves, the wasted-time behaviour, the battlefield spoils, the ceremony goodwill loss, the relations squad (with its wealth threshold) and the Empire-style quests can be changed in the mod settings.
+[*]Also works around a slow job search in Weazel Mode: whenever a hauler looked for work, the clone vat hauling job checked every building on the map, even with no clone vat built. It now looks only at clone vats. This stays until Weazel Mode changes it.
 [*]Safe to add to an existing save. Remove it only when no XCC strike team or collecting squad is on the map.
 [/list]
 [hr][/hr]
