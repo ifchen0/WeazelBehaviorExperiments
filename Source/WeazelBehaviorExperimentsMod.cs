@@ -44,7 +44,7 @@ namespace WeazelBehaviorExperiments
         public WeazelBehaviorExperimentsMod(ModContentPack content) : base(content)
         {
             Settings = GetSettings<ExperimentSettings>();
-            new Harmony("ifchen0.weazelbehaviorexperiments").PatchAll();
+            new Harmony("ifchen0.weazelbehaviorexperiments").PatchAll(typeof(WeazelBehaviorExperimentsMod).Assembly);
         }
 
         public override string SettingsCategory() => "Weazel Behavior Experiments";
