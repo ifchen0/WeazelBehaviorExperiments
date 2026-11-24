@@ -16,8 +16,6 @@
   <WBE_DriftPlunder_Desc>原版每50天會讓XCC的好感度往長期好感度下滑10點。若XCC與你中立、好感度低於0，且你的殖民地夠富裕，XCC會改派一支小隊來拿走全地圖的銀幣（會自己開門，不會動其他物品）。帶走的銀幣照原版送禮算法換回好感度（好感度0以下時40銀=1點，越友好換得越少）。整隊最多只拿到讓好感度回到80的量（75以上即為同盟）；找不到銀幣就照原版下滑。</WBE_DriftPlunder_Desc>
   <WBE_DriftPlunderMinWealth>XCC來搜刮的最低殖民地財富：{0}</WBE_DriftPlunderMinWealth>
   <WBE_DriftPlunderMinWealth_Desc>以財富最高的玩家基地計算，低於這個值時照原版好感度下滑。預設14000是原版財富開始增加襲擊點數的門檻。</WBE_DriftPlunderMinWealth_Desc>
-  <WBE_NoXccEmpireQuests>XCC不發布帝國式任務</WBE_NoXccEmpireQuests>
-  <WBE_NoXccEmpireQuests_Desc>原版讓任何有頭銜的派系都能發布帝國的任務，但任務裡的貴族、傭兵都是人類，還坐帝國的穿梭機。XCC不再發布招待任務（客人、囚犯、動物）、建造紀念碑、借用殖民者，以及可能派傭兵協助的「撐過威脅換獎勵」任務。不帶傭兵的兩種「撐過威脅換獎勵」任務（環境異象、附近據點）照常發布，仍可取得功績。</WBE_NoXccEmpireQuests_Desc>
 
   <WBE_CaravanRaidArrived>一支{XCC_name}突擊隊尾隨{CARAVAN_name}的商隊而來，準備襲擊商隊。</WBE_CaravanRaidArrived>
   <WBE_CaptiveForSale>{FACTION_name}已把{PAWN_labelShort}列為奴隸商品，之後可能出現在XCC奴隸商隊的貨品中；在那之前仍可能收到贖金要求。</WBE_CaptiveForSale>
