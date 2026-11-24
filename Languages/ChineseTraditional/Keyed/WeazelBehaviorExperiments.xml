@@ -5,7 +5,7 @@
   <WBE_StrikeTeamKidnap>突擊隊會帶走倒地的商隊成員</WBE_StrikeTeamKidnap>
   <WBE_StrikeTeamKidnap_Desc>搜刮物資前，突擊隊會先把倒地的商隊成員帶走（XCC做奴隸買賣）。已被你救起、俘虜或安置在床上的人不受影響。</WBE_StrikeTeamKidnap_Desc>
   <WBE_CaptiveSlaves>XCC把擄走的人當作奴隸</WBE_CaptiveSlaves>
-  <WBE_CaptiveSlaves_Desc>原版中，被綁架的人約30天後會加入綁架者的陣營。XCC則一直把他們關著：你的殖民者仍可付贖金換回。約30天後，被擄者還會被列為奴隸商品，可能出現在XCC奴隸商隊的貨品中（每支商隊最多2人，需要Ideology），武器、隨身物品和每件價值320銀以上的衣物會被沒收。買回的殖民者會直接歸隊；買下的其他人會成為你的奴隸，解放後會回到被XCC擄走前的陣營。沒人買下的殖民者會回到被擄狀態，其他人則就此消失。沒有Ideology時，被擄者只會一直被關著。</WBE_CaptiveSlaves_Desc>
+  <WBE_CaptiveSlaves_Desc>Weazel Mode會把XCC擄走的人一直關著，30天後在XCC據點的商人處出售，沒被買走的人就歸XCC所有。這個選項改用以下做法取代：你的殖民者仍可付贖金換回，約30天後被擄者會被列為奴隸商品，可能出現在XCC奴隸商隊的貨品中（每支商隊最多2人，需要Ideology），武器、隨身物品和每件價值320銀以上的衣物會被沒收。買回的殖民者會直接歸隊；買下的其他人會成為你的奴隸，解放後會回到被XCC擄走前的陣營。沒人買下的殖民者會回到被擄狀態，其他人則就此消失。沒有Ideology時，被擄者只會一直被關著。關閉時改用Weazel Mode本身的做法。</WBE_CaptiveSlaves_Desc>
   <WBE_AidSalvage>參戰過的XCC支援隊離開時會拿走戰場裝備</WBE_AidSalvage>
   <WBE_AidSalvage_Desc>用功績或通訊台召來的XCC支援隊，若受過傷，離開時會拿走倉庫以外地上的武器和衣物作為戰利品，不會動你的倉庫。</WBE_AidSalvage_Desc>
   <WBE_AidPlunder>毫髮無傷的XCC支援隊離開時會拿走銀幣</WBE_AidPlunder>

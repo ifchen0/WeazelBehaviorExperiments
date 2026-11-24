@@ -213,7 +213,10 @@ namespace WeazelBehaviorExperiments
         }
     }
 
+    // Weazel Mode has its own XCC prefix here that also returns false; ours runs first so it replaces Weazel's
+    // handling while the setting is on. With the setting off we return true and Weazel's prefix takes over.
     [HarmonyPatch(typeof(KidnappedPawnsTracker), nameof(KidnappedPawnsTracker.KidnappedPawnsTrackerTick))]
+    [HarmonyPriority(Priority.High)]
     public static class Patch_KidnappedPawnsTrackerTick
     {
         private static readonly AccessTools.FieldRef<KidnappedPawnsTracker, Faction> FactionRef =
@@ -227,7 +230,7 @@ namespace WeazelBehaviorExperiments
             if (comp == null) return true;
             if (!WeazelBehaviorExperimentsMod.Settings.captiveSlaves)
             {
-                // Turned off: vanilla recruits again, but colonists already out on sale still come back.
+                // Turned off: Weazel Mode's (or vanilla's) handling applies, but colonists already out on sale still come back.
                 if (Find.TickManager.TicksGame % 15051 == 0)
                     comp.ReturnUnsold(faction, __instance.KidnappedPawnsListForReading);
                 return true;
@@ -259,6 +262,28 @@ namespace WeazelBehaviorExperiments
             var comp = GameComponent_XccSlaves.Instance;
             if (comp == null) return;
             __result = comp.FillStock(__result.ToList());
+        }
+    }
+
+    // Weazel Mode sells XCC captives held 30 days through XCC settlement traders (vanilla slave stock) and takes
+    // them off the kidnapped list. While our sale is on, that would race ours for the same captives, so it is
+    // switched off; it comes back with the setting off.
+    [HarmonyPatch]
+    public static class Patch_WeazelSettlementCaptiveSale
+    {
+        public static bool Prepare() => TargetMethod() != null;
+
+        public static MethodBase TargetMethod()
+        {
+            var type = AccessTools.TypeByName("WeazelXCCAid.Patch_XCCKidnap_SellCaptive");
+            return type == null ? null : AccessTools.Method(type, "TakeCaptiveForSale");
+        }
+
+        public static bool Prefix(ref Pawn __result)
+        {
+            if (!WeazelBehaviorExperimentsMod.Settings.captiveSlaves) return true;
+            __result = null;
+            return false;
         }
     }
 }
